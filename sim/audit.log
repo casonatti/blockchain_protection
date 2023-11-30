@@ -1,0 +1,9 @@
+t=2023-11-29T11:23:28-0300 lvl=info msg=Configured api=signer "audit log"=audit.log
+t=2023-11-29T11:26:50-0300 lvl=info msg=Version    api=signer type=request metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-29T11:26:50-0300 lvl=info msg=Version    api=signer type=response data=6.1.0 error=nil
+t=2023-11-29T11:28:52-0300 lvl=info msg=List       api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-29T11:28:52-0300 lvl=info msg=List       api=signer type=response data=[]
+t=2023-11-29T11:29:32-0300 lvl=info msg=List       api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}"
+t=2023-11-29T11:29:32-0300 lvl=info msg=List       api=signer type=response data=[0x65BbACef21EC52B240538497441B9DfF24BF839a]
+t=2023-11-29T11:29:32-0300 lvl=info msg=SignTransaction api=signer type=request  metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}" tx="{\"from\":\"0x65BbACef21EC52B240538497441B9DfF24BF839a\",\"to\":\"0x2854fA282364A80f979b2024259AEB16b9e9348C\",\"gas\":\"0x5208\",\"gasPrice\":\"0x3b9aca00\",\"maxFeePerGas\":null,\"maxPriorityFeePerGas\":null,\"value\":\"0x2710\",\"nonce\":\"0x1\",\"data\":\"0x\",\"chainId\":\"0x1d9d0d8\"}" methodSelector=<nil>
+t=2023-11-29T11:29:42-0300 lvl=info msg=SignTransaction api=signer type=response data=f86901843b9aca00825208942854fa282364a80f979b2024259aeb16b9e9348c822710808403b3a1d4a01fe9f1c7ee05a43baf40237fc5b0af2ba9daf5a4fd06a3f8323ffe557c0db898a02c16ef3eaff78a3572bbc0126a9e2d3b397a4615ad1b076c60119f5b726eb5fd error=nil
