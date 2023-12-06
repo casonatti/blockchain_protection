@@ -14,7 +14,7 @@ def print_event(cpu, data, size):
 
 i_map = b["inode_map"]
 
-i_map[c_int(0)] = c_uint32(5112459) #TODO: flexibilizar o arquivo protegido
+i_map[c_int(0)] = c_uint32(5114453) #TODO: flexibilizar o arquivo protegido
 
 print("%-6s %-6s %-10s %-6s" % ("PID", "UID", "MESSAGE", "COUNTER"))
 

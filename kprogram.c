@@ -30,15 +30,19 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
   unsigned int *inode_ptr = inode_map.lookup(&index);   //pega o endereço do inode do arquivo protegido no map de inodes (inserido no userspace)
   if(inode_ptr != NULL) {
     data.protected_inode = *inode_ptr;                  //se existe um endereço, armazena o inode na estrutura de dados
+    
     if(data.protected_inode == data.hooked_inode) {     //compara o inode do arquivo protegido com o inode do arquivo que esta sendo aberto
       data.timestamp = bpf_ktime_get_ns();              //registra o timestamp do evento
       u64 *counter_ptr = counter_table.lookup(&data.uid);
+
       if(counter_ptr != 0) {
         counter = *counter_ptr;
-        counter++;
-        counter_table.update(&data.uid, &counter);
-        data.counter = counter;
       }
+
+      counter++;
+      counter_table.update(&data.uid, &counter);
+      data.counter = counter;
+
       if(data.uid == 1000) {                            //caso seja um usuario nao autorizado, cria a mensagem de negacao e mata o processo
         char message[18] = "Permission Denied";
         bpf_probe_read_kernel(&data.message, sizeof(data.message), message); //helper function usada para ler dados do kernel e armazena no espaco do ebpf
