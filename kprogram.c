@@ -5,6 +5,7 @@
 
 BPF_HASH(counter_table);
 BPF_ARRAY(inode_map, u32, 1);
+BPF_ARRAY(epoch_ts_map, u64, 1);
 BPF_PERF_OUTPUT(output);
 
 struct data_t {
@@ -18,9 +19,14 @@ struct data_t {
 };
 
 int protected_file(struct pt_regs *ctx, struct file *file) {
+  u64 boot_ebpf_ts = bpf_ktime_get_ns();
   struct data_t data = {};
   int index = 0;
   u64 counter = 0;
+  u64 *boot_epoch_ts = epoch_ts_map.lookup(&index);
+
+  if(!boot_epoch_ts)
+    return -1;
 
   data.hooked_inode = file->f_inode->i_ino;             //pega o inode do arquivo que esta sendo aberto 
 
@@ -32,7 +38,7 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
     data.protected_inode = *inode_ptr;                  //se existe um endereço, armazena o inode na estrutura de dados
     
     if(data.protected_inode == data.hooked_inode) {     //compara o inode do arquivo protegido com o inode do arquivo que esta sendo aberto
-      data.timestamp = bpf_ktime_get_ns();              //registra o timestamp do evento
+      data.timestamp = *boot_epoch_ts + boot_ebpf_ts;   //time since epoch (got in user space when the program started) + computer uptime => timestamp in ns  
       u64 *counter_ptr = counter_table.lookup(&data.uid);
 
       if(counter_ptr != 0) {
