@@ -4,6 +4,7 @@
 #include <uapi/linux/ptrace.h>
 
 BPF_HASH(counter_table);
+BPF_HASH(permitted_processes_map, u64);
 BPF_ARRAY(inode_map, u32, 1);
 BPF_ARRAY(epoch_ts_map, u64, 1);
 BPF_PERF_OUTPUT(output);
@@ -39,6 +40,17 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
     
     if(data.protected_inode == data.hooked_inode) {     //compara o inode do arquivo protegido com o inode do arquivo que esta sendo aberto
       data.timestamp = *boot_epoch_ts + boot_ebpf_ts;   //time since epoch (got in user space when the program started) + computer uptime => timestamp in ns  
+
+      u64 *permitted_process_ptr = permitted_processes_map.lookup(&data.uid);
+
+      if(permitted_process_ptr == NULL) {
+        char message[18] = "Invalid UID";
+
+        bpf_probe_read_kernel(&data.message, sizeof(data.message), message);
+        output.perf_submit(ctx, &data, sizeof(data));
+        //bpf_send_signal(9);
+      }
+
       u64 *counter_ptr = counter_table.lookup(&data.uid);
 
       if(counter_ptr != 0) {

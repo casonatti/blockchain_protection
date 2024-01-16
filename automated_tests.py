@@ -24,7 +24,7 @@ def read_file_multiple_times(file_path, times):
             #formated_timestamp = f"{timestamp:.19}"
             csv_writer.writerow([i+1, elapsed])
 
-            # Introducing a delay of approximately 15 microsecond using timeit
-            #timeit.timeit(lambda: None, number=15000)  # Adjust number to control delay precision
+            # Introducing a delay of approximately 270 nanoseconds using timeit
+            timeit.timeit(lambda: None, number=270)  # Adjust number to control delay precision
 
 read_file_multiple_times(file_path, 10000)

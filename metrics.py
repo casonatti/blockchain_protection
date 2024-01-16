@@ -1,4 +1,5 @@
 import pandas as pd
+import math
 import matplotlib.pyplot as plt
 
 test_number_file = open('./test_number.txt','r')
@@ -161,29 +162,31 @@ if test_number == 'test_3':
   df_inot_s2 = pd.read_csv(source_inot_s2)
   df_inot_s3 = pd.read_csv(source_inot_s3)
 
-  print(df_at_e_s1.size/2)
-  print(df_at_e_s2.size/2)
-  print(df_at_e_s3.size/2)
-  print(df_at_i_s1.size/2)
-  print(df_at_i_s2.size/2)
-  print(df_at_i_s3.size/2)
+  mean_ebpf = (df_ebpf_s1.size/2 + df_ebpf_s2.size/2 + df_ebpf_s3.size/2)/3
+  mean_inotify = (df_inot_s1.size/2 + df_inot_s2.size/2 + df_inot_s3.size/2)/3
 
-  print(df_ebpf_s1.size/2)
-  print(df_ebpf_s2.size/2)
-  print(df_ebpf_s3.size/2)
+  mean_std_ebpf = math.sqrt((((df_ebpf_s1.size/2)-mean_ebpf)**2 + ((df_ebpf_s2.size/2)-mean_ebpf)**2 + ((df_ebpf_s3.size/2)-mean_ebpf)**2)/3)
+  mean_std_inotify = math.sqrt((((df_inot_s1.size/2)-mean_inotify)**2 + ((df_inot_s2.size/2)-mean_inotify)**2 + ((df_inot_s3.size/2)-mean_inotify)**2)/3)
+  errors = [mean_std_ebpf, mean_std_inotify]
 
-  print(df_inot_s1.size/2)
-  print(df_inot_s2.size/2)
-  print(df_inot_s3.size/2)
+  print(mean_ebpf)
+  print(mean_inotify)
+  print(mean_std_ebpf)
+  print(mean_std_inotify)
 
-  a = df_ebpf_s1.size/2 + df_ebpf_s2.size/2 + df_ebpf_s3.size/2
-  print(a/3)
+  plt.figure(figsize=(8,5))
+  plt.grid(axis='y', linestyle='solid', linewidth=1.25)
+  plt.gca().set_axisbelow(True)
+  total_access = plt.axhline(10000, linestyle='dashed', linewidth=1, color='red', label='Normal Access Count')
+  plt.bar(['eBPF', 'Inotify'], [mean_ebpf, mean_inotify], color='lightgray', edgecolor='black', yerr=errors, capsize=7)
 
-  #df.plot.line(y='Diff_Inotify', figsize=(10,6))
-  #df.plot.line(y='Diff_eBPF', figsize=(10,6))
+  plt.ylim(0, 11000)
 
-  #plt.title("Time spent per Iteration")
-  #plt.xlabel("Iteration")
-  #plt.ylabel("Time(ns)")
+  plt.xlabel("Type of Access")
+  plt.ylabel("Access Count Mean")
+  plt.legend(handles=[total_access])
+
+  plt.text(-0.19, 10000 + 280, f'Total Access: 10000', color='red', fontsize=12, ha='center')
 
   #plt.show()
+  plt.savefig("/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/access_count.pdf")
