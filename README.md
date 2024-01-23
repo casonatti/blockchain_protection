@@ -37,7 +37,7 @@ We welcome contributions from the community. If you find issues or have suggesti
 
 ## License
 
-This project is licensed under the [APACHE License].
+This project is licensed under the [Apache License 2.0](LICENSE) - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
