@@ -25,5 +25,7 @@ teste 3 = taxa de falhas (sem delay entre as iteracoes)
 		desvio padrao inotify: 5,3541
 	
 	TODO: subir o delay até encontrar o ponto que o ebpf não falha mais
+		delay minimo para o programa ebpf nao falhar = 270ns
+			programa inotify tem perdas com esse delay (entre 500 a 800 em 100000 acessos)
 	
 	obs.: apos a analise dos resultados do teste 3, foram feitos outros testes usando scripts em shell, nos quais o programa em ebpf capturou todas as chamadas

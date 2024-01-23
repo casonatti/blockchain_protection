@@ -1,0 +1,2 @@
+/home/jeison/ic/repositorios/solucao_ic/teste/wallet.txt
+/home/jeison/ic/repositorios/solucao_ic/teste/keystore.txt

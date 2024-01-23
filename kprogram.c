@@ -5,13 +5,15 @@
 
 BPF_HASH(counter_table);
 BPF_HASH(permitted_processes_map, u64);
-BPF_ARRAY(inode_map, u32, 1);
+BPF_HASH(inode_map, u32);
+//BPF_ARRAY(inode_map, u32, 1);
 BPF_ARRAY(epoch_ts_map, u64, 1);
 BPF_PERF_OUTPUT(output);
 
 struct data_t {
   u64 uid;
   u32 pid;
+  u32 ppid;
   u32 hooked_inode;
   u32 protected_inode;
   u64 timestamp;
@@ -22,6 +24,7 @@ struct data_t {
 int protected_file(struct pt_regs *ctx, struct file *file) {
   u64 boot_ebpf_ts = bpf_ktime_get_ns();
   struct data_t data = {};
+  struct task_struct *task;
   int index = 0;
   u64 counter = 0;
   u64 *boot_epoch_ts = epoch_ts_map.lookup(&index);
@@ -34,7 +37,10 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
   data.pid = bpf_get_current_pid_tgid();                //pega o PID do processo que efetuou a chamada de sistema
   data.uid = bpf_get_current_uid_gid() & 0xFFFFFFFF;    //pega o ID do usuario que efetuou a chamada de sistema
 
-  unsigned int *inode_ptr = inode_map.lookup(&index);   //pega o endereço do inode do arquivo protegido no map de inodes (inserido no userspace)
+  task = (struct task_struct *) bpf_get_current_task();
+  data.ppid = task->real_parent->tgid;
+
+  u64 *inode_ptr = inode_map.lookup(&data.hooked_inode);   //pega o endereço do inode do arquivo protegido no map de inodes (inserido no userspace)
   if(inode_ptr != NULL) {
     data.protected_inode = *inode_ptr;                  //se existe um endereço, armazena o inode na estrutura de dados
     

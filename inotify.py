@@ -15,12 +15,17 @@ class AccessCounter:
         self.access_count += 1
 
 def monitor_file_access(file_path, access_counter):
+    paths_to_monitor = []
+
+    with open("./teste/inode_paths.txt", "r") as file:
+        paths_to_monitor = [line.strip() for line in file.readlines()]
+
     wm = pyinotify.WatchManager()
     mask = pyinotify.IN_OPEN
 
     class EventHandler(pyinotify.ProcessEvent):
         def process_default(self, event):
-            if event.pathname == file_path:
+            if event.mask & pyinotify.IN_OPEN:
                 access_time = time.time_ns()
                 access_counter.increment_count()
                 with open(result_file, 'a') as csv_obj:
@@ -33,10 +38,12 @@ def monitor_file_access(file_path, access_counter):
     handler = EventHandler()
     notifier = pyinotify.Notifier(wm, handler)
 
-    wdd = wm.add_watch(os.path.dirname(file_path), mask)
+    for path in paths_to_monitor:
+        wdd = wm.add_watch(path, mask, rec=False)
+    #wdd = wm.add_watch(os.path.dirname(file_path), mask)
 
     try:
-        print(f"Monitoring access to file: {file_path}")
+        print(f"iNotify is monitoring!")
         notifier.loop()
     except KeyboardInterrupt:
         print("Monitoring stopped.")

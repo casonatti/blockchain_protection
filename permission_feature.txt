@@ -1,0 +1,11 @@
+********************************************************************************************
+									Permitted Processes Feature
+********************************************************************************************
+
+verificar o comportamento dos PIDs (a principio novos processos seguem um contador para definir o ID)
+
+verificar se o Clef cria subprocessos a cada nova autenticacao
+	verificar se consigo rastrear o processo pai desses subprocessos ate identificar que se trata do Clef
+	como adicionar o processo pai na lista de permissoes?
+	
+mais inodes e clef
