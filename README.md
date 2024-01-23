@@ -1,6 +1,6 @@
 # Scylla: Securing Blockchain Wallet Files using eBPF
 
-<img src="images/logo.png" width="128"/>
+<img src="logo.png" width="128"/>
 
 
 ## Introduction
@@ -27,7 +27,7 @@ In comparative evaluations, **solution** has proven to outperform *inotify*, a L
 
 To use **Scylla**, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/solution.git`
+1. Clone the repository: `git clone https://github.com/casonatti/blockchain_protection`
 2. Follow the installation instructions in the provided documentation.
 3. Execute **Scylla** during the boot time to enable automatic protection.
 
@@ -45,6 +45,3 @@ We would like to express our gratitude to the open-source community and contribu
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Language](https://img.shields.io/badge/Language-Python-green.svg)](https://www.python.org/)
-[![Build Status](https://travis-ci.org/your-username/solution.svg?branch=master)](https://travis-ci.org/your-username/solution)
-[![Code Style](https://img.shields.io/badge/Code%20Style-PEP%208-blueviolet.svg)](https://www.python.org/dev/peps/pep-0008/)
-[![Release](https://img.shields.io/github/v/release/your-username/solution.svg)](https://github.com/your-username/solution/releases)
