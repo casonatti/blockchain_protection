@@ -37,11 +37,11 @@ We welcome contributions from the community. If you find issues or have suggesti
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE) - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the [APACHE License].
 
 ## Acknowledgments
 
 We would like to express our gratitude to the open-source community and contributors for their valuable feedback and contributions to enhance the effectiveness of **Scylla**.
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Language](https://img.shields.io/badge/Language-Python-green.svg)](https://www.python.org/)
