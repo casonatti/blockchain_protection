@@ -2,46 +2,15 @@ import pandas as pd
 import math
 import matplotlib.pyplot as plt
 
-test_number_file = open('./test_number.txt','r')
-test_number = test_number_file.read()
+test_type_file = open('./tests/test_type.txt','r')
+test_type = test_type_file.read()
 
 
-if test_number == 'test_0':
-  source_automated_tests = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_" + test_number + ".csv"
-  source_ebpf = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_" + test_number + "_corrected.csv"
-  source_inofify = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/inotify_" + test_number + ".csv"
-
-  df1 = pd.read_csv(source_automated_tests)
-  df2 = pd.read_csv(source_ebpf)
-  df3 = pd.read_csv(source_inofify)
-
-  merged_df = pd.merge(df1, df2, on='Iteration')
-  df = pd.merge(merged_df, df3, on='Iteration')
-
-  vector_size = [None]*1000
-
-  df['Diff_Inotify'] = vector_size
-  df['Diff_eBPF'] = vector_size
-
-  df['Diff_Inotify'] = df['TS_Inotify'] - df['TS_Tests']
-  df['Diff_eBPF'] = df['TS_eBPF'] - df['TS_Tests']
-
-  print(df.head())
-
-  df.plot.line(y=['Diff_eBPF', 'Diff_Inotify'], figsize=(10,6))
-
-  plt.title("eBPF x Inotify")
-  plt.xlabel("Iteration")
-  plt.ylabel("Time(ns)")
-
-  #plt.show()
-  plt.savefig("/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/mean_time.pdf")
-
-if test_number == 'test_1':
-  source_automated_tests_ebpf = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_ebpf_" + test_number + ".csv"
-  source_automated_tests_inotify = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_inotify_" + test_number + ".csv"
-  source_ebpf = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_" + test_number + "_corrected.csv"
-  source_inofify = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/inotify_" + test_number + ".csv"
+if test_type == 'access_time':
+  source_automated_tests_ebpf = "./tests/" + test_type + "/at_ebpf_" + test_type + ".csv"
+  source_automated_tests_inotify = "./tests/" + test_type + "/at_inotify_" + test_type + ".csv"
+  source_ebpf = "./tests/" + test_type + "/ebpf_" + test_type + "_corrected.csv"
+  source_inofify = "./tests/" + test_type + "/inotify_" + test_type + ".csv"
 
   df1 = pd.read_csv(source_automated_tests_ebpf)
   df2 = pd.read_csv(source_automated_tests_inotify)
@@ -73,14 +42,14 @@ if test_number == 'test_1':
   plt.ylabel("Time(ns)")
 
   #plt.show()
-  plt.savefig("/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_x_inotify.pdf")
+  plt.savefig("./tests/" + test_type + "/ebpf_x_inotify.pdf")
 
-if test_number == 'test_2':
-  source_automated_tests = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_without_" + test_number + ".csv"
-  source_ebpf = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_ebpf_" + test_number + ".csv"
-  source_inotify = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_inotify_" + test_number + ".csv"
-  source_p_ebpf = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_p_ebpf_" + test_number + ".csv"
-  source_p_inotify = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_p_inotify_" + test_number + ".csv"
+if test_type == 'overhead':
+  source_automated_tests = "./tests/" + test_type + "/at_without_" + test_type + ".csv"
+  source_ebpf = "./tests/" + test_type + "/at_ebpf_" + test_type + ".csv"
+  source_inotify = "./tests/" + test_type + "/at_inotify_" + test_type + ".csv"
+  source_p_ebpf = "./tests/" + test_type + "/at_p_ebpf_" + test_type + ".csv"
+  source_p_inotify = "./tests/" + test_type + "/at_p_inotify_" + test_type + ".csv"
   
 
   df1 = pd.read_csv(source_automated_tests)
@@ -128,23 +97,23 @@ if test_number == 'test_2':
   plt.text(-0.19, mean_at + 280, f'Mean: {mean_at:.2f}', color='red', fontsize=12, ha='center', rotation=45)
 
   #plt.show()
-  plt.savefig("/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/overhead.pdf")
+  plt.savefig("./tests/" + test_type + "/overhead.pdf")
 
-if test_number == 'test_3':
-  print(test_number)
+if test_type == 'access_fault':
+  print(test_type)
 
-  source_automated_tests_ebpf_s1 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_ebpf_sample_1_" + test_number + ".csv"
-  source_automated_tests_ebpf_s2 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_ebpf_sample_2_" + test_number + ".csv"
-  source_automated_tests_ebpf_s3 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_ebpf_sample_3_" + test_number + ".csv"
-  source_automated_tests_inot_s1 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_inot_sample_1_" + test_number + ".csv"
-  source_automated_tests_inot_s2 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_inot_sample_2_" + test_number + ".csv"
-  source_automated_tests_inot_s3 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/at_inot_sample_3_" + test_number + ".csv"
-  source_ebpf_s1 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_sample_1_" + test_number + "_corrected.csv"
-  source_ebpf_s2 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_sample_2_" + test_number + "_corrected.csv"
-  source_ebpf_s3 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_sample_3_" + test_number + "_corrected.csv"
-  source_inot_s1 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/inotify_sample_1_" + test_number + ".csv"
-  source_inot_s2 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/inotify_sample_2_" + test_number + ".csv"
-  source_inot_s3 = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/inotify_sample_3_" + test_number + ".csv"
+  source_automated_tests_ebpf_s1 = "./tests/" + test_type + "/at_ebpf_sample_1_" + test_type + ".csv"
+  source_automated_tests_ebpf_s2 = "./tests/" + test_type + "/at_ebpf_sample_2_" + test_type + ".csv"
+  source_automated_tests_ebpf_s3 = "./tests/" + test_type + "/at_ebpf_sample_3_" + test_type + ".csv"
+  source_automated_tests_inot_s1 = "./tests/" + test_type + "/at_inot_sample_1_" + test_type + ".csv"
+  source_automated_tests_inot_s2 = "./tests/" + test_type + "/at_inot_sample_2_" + test_type + ".csv"
+  source_automated_tests_inot_s3 = "./tests/" + test_type + "/at_inot_sample_3_" + test_type + ".csv"
+  source_ebpf_s1 = "./tests/" + test_type + "/ebpf_sample_1_" + test_type + "_corrected.csv"
+  source_ebpf_s2 = "./tests/" + test_type + "/ebpf_sample_2_" + test_type + "_corrected.csv"
+  source_ebpf_s3 = "./tests/" + test_type + "/ebpf_sample_3_" + test_type + "_corrected.csv"
+  source_inot_s1 = "./tests/" + test_type + "/inotify_sample_1_" + test_type + ".csv"
+  source_inot_s2 = "./tests/" + test_type + "/inotify_sample_2_" + test_type + ".csv"
+  source_inot_s3 = "./tests/" + test_type + "/inotify_sample_3_" + test_type + ".csv"
 
 
   df_at_e_s1 = pd.read_csv(source_automated_tests_ebpf_s1)
@@ -189,4 +158,4 @@ if test_number == 'test_3':
   plt.text(-0.19, 10000 + 280, f'Total Access: 10000', color='red', fontsize=12, ha='center')
 
   #plt.show()
-  plt.savefig("/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/access_count.pdf")
+  plt.savefig("./tests/" + test_type + "/access_count.pdf")

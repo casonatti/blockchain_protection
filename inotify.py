@@ -3,9 +3,9 @@ import pyinotify
 import time
 import csv
 
-test_number_file = open('./test_number.txt','r')
-test_number = test_number_file.read()
-result_file = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/inotify_" + test_number + ".csv"
+test_type_file = open('./test_number.txt','r')
+test_type = test_type_file.read()
+result_file = "./tests/" + test_type + "/inotify_" + test_type + ".csv"
 
 class AccessCounter:
     def __init__(self):

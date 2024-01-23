@@ -1,10 +1,10 @@
 import csv
 
-test_number_file = open('./test_number.txt','r')
-test_number = test_number_file.read()
+test_type_file = open('./tests/test_type.txt','r')
+test_type = test_type_file.read()
 
-input = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_" + test_number + ".csv"
-output = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_" + test_number + "_corrected.csv"
+input = "./tests/" + test_type + "/ebpf_" + test_type + ".csv"
+output = "./tests/" + test_type + "/ebpf_" + test_type + "_corrected.csv"
 
 i = 1
 
