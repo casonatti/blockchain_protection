@@ -15,9 +15,9 @@ current_epoch_ts = time.time_ns()
 boot_relative_ts = time.monotonic_ns()
 boot_epoch_ts = current_epoch_ts - boot_relative_ts
 
-test_number_file = open('./test_number.txt','r')
-test_number = test_number_file.read()
-result_file = "/home/jeison/ic/repositorios/solucao_ic/teste/" + test_number + "/ebpf_" + test_number + ".csv"
+test_type_file = open('./tests/test_type.txt','r')
+test_type = test_type_file.read()
+result_file = "./tests/" + test_type + "/ebpf_" + test_type + ".csv"
 
 program = "kprogram.c"
 
@@ -34,14 +34,14 @@ permitted_processes = b["permitted_processes_map"]
 #populating maps
 ts_map[c_int(0)] = c_uint64(boot_epoch_ts)
 
-inode_list_file = open("./teste/protectted_inodes.txt", "r")
+inode_list_file = open("./tests/protected_inodes.txt", "r")
 line = inode_list_file.readline()
 while line:
   print("Copying " + str(int(line)) + " to eBPF map [inode_map]")
   i_map[c_uint32(int(line))] = c_uint32(int(line))
   line = inode_list_file.readline()
 
-permitted_processes_file = open("./teste/permitted_pids.txt", "r")
+permitted_processes_file = open("./tests/permitted_pids.txt", "r")
 line = permitted_processes_file.readline()
 while line:
   print("Copying " + str(int(line)) + " to eBPF map [permitted_processes_map]")
