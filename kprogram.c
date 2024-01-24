@@ -12,7 +12,7 @@ BPF_PERF_OUTPUT(output);
 
 struct data_t {
   u64 uid;
-  u32 pid;
+  u32 gpid;
   u32 ppid;
   u32 hooked_inode;
   u32 protected_inode;
@@ -34,7 +34,8 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
 
   data.hooked_inode = file->f_inode->i_ino;             //pega o inode do arquivo que esta sendo aberto 
 
-  data.pid = bpf_get_current_pid_tgid();                //pega o PID do processo que efetuou a chamada de sistema
+  u64 group_pid = bpf_get_current_pid_tgid();           //u64 takes 64 bits where the first 32 bits are the group PID and the least 32 are the thread PID
+  data.gpid = group_pid >> 32;                          //pega o GPID do processo que efetuou a chamada de sistema
   data.uid = bpf_get_current_uid_gid() & 0xFFFFFFFF;    //pega o ID do usuario que efetuou a chamada de sistema
 
   task = (struct task_struct *) bpf_get_current_task();
@@ -67,7 +68,7 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
       counter_table.update(&data.uid, &counter);
       data.counter = counter;
 
-      if(data.uid == 1000) {                            //caso seja um usuario nao autorizado, cria a mensagem de negacao e mata o processo
+      if(data.uid == 1001) {                            //caso seja um usuario nao autorizado, cria a mensagem de negacao e mata o processo
         char message[18] = "Permission Denied";
         bpf_probe_read_kernel(&data.message, sizeof(data.message), message); //helper function usada para ler dados do kernel e armazena no espaco do ebpf
         bpf_send_signal(9);                             //helper function para enviar sinais do sistema
