@@ -1,6 +1,6 @@
 # Scylla: Securing Blockchain Wallet Files using eBPF
 
-<img src="logo.png" width="128"/>
+<img src="misc/logo.png" width="128"/>
 
 
 ## Introduction

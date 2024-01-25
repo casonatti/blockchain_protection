@@ -12,8 +12,8 @@ BPF_PERF_OUTPUT(output);
 
 struct data_t {
   u64 uid;
+  u32 pid;
   u32 gpid;
-  u32 ppid;
   u32 hooked_inode;
   u32 protected_inode;
   u64 timestamp;
@@ -24,7 +24,6 @@ struct data_t {
 int protected_file(struct pt_regs *ctx, struct file *file) {
   u64 boot_ebpf_ts = bpf_ktime_get_ns();
   struct data_t data = {};
-  struct task_struct *task;
   int index = 0;
   u64 counter = 0;
   u64 *boot_epoch_ts = epoch_ts_map.lookup(&index);
@@ -36,10 +35,8 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
 
   u64 group_pid = bpf_get_current_pid_tgid();           //u64 takes 64 bits where the first 32 bits are the group PID and the least 32 are the thread PID
   data.gpid = group_pid >> 32;                          //pega o GPID do processo que efetuou a chamada de sistema
+  data.pid = bpf_get_current_pid_tgid(); 
   data.uid = bpf_get_current_uid_gid() & 0xFFFFFFFF;    //pega o ID do usuario que efetuou a chamada de sistema
-
-  task = (struct task_struct *) bpf_get_current_task();
-  data.ppid = task->real_parent->tgid;
 
   u64 *inode_ptr = inode_map.lookup(&data.hooked_inode);   //pega o endereço do inode do arquivo protegido no map de inodes (inserido no userspace)
   if(inode_ptr != NULL) {
@@ -48,36 +45,39 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
     if(data.protected_inode == data.hooked_inode) {     //compara o inode do arquivo protegido com o inode do arquivo que esta sendo aberto
       data.timestamp = *boot_epoch_ts + boot_ebpf_ts;   //time since epoch (got in user space when the program started) + computer uptime => timestamp in ns  
 
-      u64 *permitted_process_ptr = permitted_processes_map.lookup(&data.uid);
+      u64 gpid_index = 0;
+      u64 *permitted_process_ptr = permitted_processes_map.lookup(&gpid_index);
 
       if(permitted_process_ptr == NULL) {
-        char message[18] = "Invalid UID";
+        char message[18] = "GPID null\n";
 
         bpf_probe_read_kernel(&data.message, sizeof(data.message), message);
         output.perf_submit(ctx, &data, sizeof(data));
-        //bpf_send_signal(9);
+        bpf_send_signal(9);
+      } else {
+        u32 permitted_process_gpid = *permitted_process_ptr;
+
+        u64 *counter_ptr = counter_table.lookup(&data.uid);
+
+        if(counter_ptr != 0) {
+          counter = *counter_ptr;
+        }
+
+        counter++;
+        counter_table.update(&data.uid, &counter);
+        data.counter = counter;
+
+        if(data.gpid != permitted_process_gpid) {          //caso seja um usuario nao autorizado, cria a mensagem de negacao e mata o processo
+          char message[18] = "PID not allowed";
+          bpf_probe_read_kernel(&data.message, sizeof(data.message), message); //helper function usada para ler dados do kernel e armazena no espaco do ebpf
+          bpf_send_signal(9);                             //helper function para enviar sinais do sistema
+        } else {                                          //caso seja um usuario autorizado, cria a mensagem de autorizacao e permite a conclusao da chamada
+          char message[11] = "Authorized";
+          bpf_probe_read_kernel(&data.message, sizeof(data.message), message); //helper function usada para ler dados do kernel e armazena no espaco do ebpf
+        }
+
+        output.perf_submit(ctx, &data, sizeof(data));     //popula o buffer que pode ser lido no userspace
       }
-
-      u64 *counter_ptr = counter_table.lookup(&data.uid);
-
-      if(counter_ptr != 0) {
-        counter = *counter_ptr;
-      }
-
-      counter++;
-      counter_table.update(&data.uid, &counter);
-      data.counter = counter;
-
-      if(data.uid == 1001) {                            //caso seja um usuario nao autorizado, cria a mensagem de negacao e mata o processo
-        char message[18] = "Permission Denied";
-        bpf_probe_read_kernel(&data.message, sizeof(data.message), message); //helper function usada para ler dados do kernel e armazena no espaco do ebpf
-        bpf_send_signal(9);                             //helper function para enviar sinais do sistema
-      } else {                                          //caso seja um usuario autorizado, cria a mensagem de autorizacao e permite a conclusao da chamada
-        char message[11] = "Authorized";
-        bpf_probe_read_kernel(&data.message, sizeof(data.message), message); //helper function usada para ler dados do kernel e armazena no espaco do ebpf
-      }
-
-      output.perf_submit(ctx, &data, sizeof(data));     //popula o buffer que pode ser lido no userspace
     }
   }
 
