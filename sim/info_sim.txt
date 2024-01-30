@@ -35,6 +35,7 @@ simulacao:
 		geth --datadir node3 --port 30308 --bootnodes enode://1e8e94910360c8b175241e5969281bf186f8e2d315d81388d2551cfdc20b49c61d56a40e79091aef2d228f97440a7f26f433a9cff4852808e805f3f7b4c35e28@127.0.0.1:0?discport=30305  --networkid 31051992 --unlock 0x9cad010449F9a081Ce81D6A104749A6808090BcD --password n3.txt --authrpc.port 8553
 		
 		
+geth attach node2/geth.ipc		
 
 eth.sendTransaction({
   to: '0x2854fA282364A80f979b2024259AEB16b9e9348C',

@@ -6,7 +6,7 @@ import subprocess
 
 def print_event(cpu, data, size):
   data = b["output"].event(data)
-  print(f"{data.pid} {data.gpid} {data.uid} {data.hooked_inode} {data.message} {data.counter}")
+  print(f"{data.pid} {data.gpid} {data.uid} {data.hooked_inode} {data.message} {data.counter} {data.teste}")
   with open(result_file, 'a') as csvfile:
     csv_append = csv.writer(csvfile)
     csv_append.writerow([data.counter, data.timestamp])
@@ -25,6 +25,8 @@ try:
   clef_gpid_search = subprocess.run(["ps", "-e", "-o", "pid,comm"], stdout=subprocess.PIPE, text=True, check=True) # Run the ps command to get information about processes with the specified command name
   lines = clef_gpid_search.stdout.strip().split('\n')
   clef_gpid = [int(line.split()[0]) for line in lines[1:] if line.split()[-1] == 'clef'] # Split the output into lines and extract the PIDs for the specified program name
+  with open('./tests/permitted_pids.txt', 'w') as file:
+    file.write(str(clef_gpid[0]))
 except subprocess.CalledProcessError:
   print(f"Error retrieving PIDs for 'clef'.")
   exit()
@@ -43,17 +45,23 @@ permitted_processes_map = b["permitted_processes_map"]
 
 #populating maps
 ts_map[c_int(0)] = c_uint64(boot_epoch_ts)
-permitted_processes_map[c_uint64(0)] = c_uint64(clef_gpid[0])
+
+permitted_pids_file = open("./tests/permitted_pids.txt", "r")
+line = permitted_pids_file.readline()
+while line:
+  print("Copying " + line[:-1] + " to eBPF map [permitted_processes_map]")
+  permitted_processes_map[c_uint64(int(line))] = c_uint64(int(line))
+  line = permitted_pids_file.readline()
 
 inode_list_file = open("./tests/protected_inodes.txt", "r")
 line = inode_list_file.readline()
 while line:
-  print("Copying " + str(int(line)) + " to eBPF map [inode_map]")
+  print("Copying " + line[:-1] + " to eBPF map [inode_map]")
   i_map[c_uint32(int(line))] = c_uint32(int(line))
   line = inode_list_file.readline()
 
 
-print("%-6s %-6s %-6s %-8s %-10s %-6s" % ("PID", "GPID", "UID", "INODE", "MESSAGE", "COUNTER"))
+print("%-6s %-6s %-6s %-8s %-10s %-6s" % ("PID", "GPID", "UID", "INODE", "MESSAGE", "COUNTER(UID)"))
 #print("Program Initialized")
 
 b["output"].open_perf_buffer(print_event)
