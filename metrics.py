@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 test_type_file = open('./tests/test_type.txt','r')
 test_type = test_type_file.read()
 
+test_type = 'access_time'
+test_type = 'overhead'
+#test_type = 'access_fault'
 
 if test_type == 'access_time':
   source_automated_tests_ebpf = "./tests/" + test_type + "/at_ebpf_" + test_type + ".csv"
@@ -29,18 +32,27 @@ if test_type == 'access_time':
   df['Diff_Inotify'] = df['TS_Inotify'] - df['TS_Tests_Inotify']
   df['Diff_eBPF'] = df['TS_eBPF'] - df['TS_Tests_eBPF']
 
+  
   print(df.head())
 
-  plt.figure(figsize=(8,6))
-  plt.plot(df['Iteration'], df['Diff_Inotify'], color='darkgray', label='Inotify', linestyle='solid', linewidth=0.7)
-  plt.plot(df['Iteration'], df['Diff_eBPF'], color='red', label='eBPF', linestyle='dashdot', linewidth=0.7)
+  print(df['Diff_eBPF'].mean())
+  print(df['Diff_Inotify'].mean())
+
+  
+  plt.figure(figsize=(5,4))
+
+  plt.plot(df['Iteration'], df['Diff_Inotify'], color='black', label='inotify', linestyle='solid', linewidth=.7)
+  plt.plot(df['Iteration'], df['Diff_eBPF'], color='red', label='Scylla', linestyle='--', linewidth=.7)
+  plt.yticks(list(range(0,260000,50000)) + [10000,60000])
   plt.legend()
 
-
+  #plt.yscale('log')
   #plt.title("Time spent per Iteration")
+  plt.grid(linestyle='-', color='lightgray')
+  plt.gca().set_axisbelow(True)
   plt.xlabel("Iteration")
-  plt.ylabel("Time(ns)")
-
+  plt.ylabel("Time [ns]")
+  plt.tight_layout()
   #plt.show()
   plt.savefig("./tests/" + test_type + "/ebpf_x_inotify.pdf")
 
@@ -81,12 +93,16 @@ if test_type == 'overhead':
   df_std = df.std()
 
   errors = [df_std['Elapsed_eBPF_NP'], df_std['Elapsed_Inotify_NP'], df_std['Elapsed_eBPF_P'], df_std['Elapsed_Inotify_P']]
+  print(errors)
 
-  plt.figure(figsize=(8,5))
-  plt.grid(axis='y', linestyle='solid', linewidth=1.25)
+  plt.figure(figsize=(5,4))
+  #plt.grid(axis='y', linestyle='solid', linewidth=1.25)
+  plt.grid(axis='y', linestyle='-', color='lightgray')
   plt.gca().set_axisbelow(True)
-  mean_line = plt.axhline(mean_at, linestyle='dashed', linewidth=1, color='red', label='Normal Access Time')
-  plt.bar(['eBPF_Unprotected','Inotify_Unprotected','eBPF_Protected', 'Inotify_Protected'], [mean_e_np, mean_i_np, mean_e_p, mean_i_p], color='lightgray', edgecolor='black', yerr=errors, capsize=7)
+  mean_line = plt.axhline(mean_at, linestyle='dashed', linewidth=1, color='dimgray', label='Normal Access Mean')
+  overhead = plt.bar(['eBPF\nUnprotected','inotify\nUnprotected','eBPF\nProtected', 'inotify\nProtected'], [mean_e_np, mean_i_np, mean_e_p, mean_i_p], color='lightgray', width=0.8, edgecolor='black', yerr=errors, capsize=7, label='Overhead')
+  #plt.bar(['eBPF\nUnprotected','inotify\nUnprotected','eBPF\nProtected', 'inotify\nProtected'], [(.96*mean_e_np), (0.75*mean_i_np),(0.65*mean_e_p), (0.74*mean_i_p)], color='darkgray', width=0.78,  capsize=7)
+  
 
   plt.ylim(0, 10000)
 
@@ -94,9 +110,17 @@ if test_type == 'overhead':
   plt.ylabel("Time [ns]")
   plt.legend(handles=[mean_line])
 
-  plt.text(-0.19, mean_at + 280, f'Mean: {mean_at:.2f}', color='red', fontsize=12, ha='center', rotation=45)
+  #plt.text(-0.01, mean_at + 320, f'Mean: {round(mean_at):.2f}', color='red', fontsize=12, ha='center', rotation=35)
+  plt.text(-.87, mean_at-120, f'{round(mean_at)}', color='dimgray', fontsize=10, ha='center')
+  plt.text(-.61, mean_at-124, "-", color='black', fontsize=10, ha='center')
+  plt.text(-.62, mean_at-124, "-", color='black', fontsize=10, ha='center')
+  plt.text(0, mean_e_np/2, f'{round(((mean_e_np-mean_at)/mean_e_np)*100)}%', weight="bold", color='black', fontsize=10, ha='center')
+  plt.text(1, mean_i_np/2, f'{round(((mean_i_np-mean_at)/mean_i_np)*100)}%', weight="bold", color='black', fontsize=10, ha='center')
+  plt.text(2, mean_e_p/2, f'{round(((mean_e_p-mean_at)/mean_e_p)*100)}%', weight="bold", color='black', fontsize=10, ha='center')
+  plt.text(3, mean_i_p/2, f'{round(((mean_i_p-mean_at)/mean_i_p)*100)}%', weight="bold", color='black', fontsize=10, ha='center')
 
   #plt.show()
+  plt.tight_layout()
   plt.savefig("./tests/" + test_type + "/overhead.pdf")
 
 if test_type == 'access_fault':
@@ -144,7 +168,8 @@ if test_type == 'access_fault':
   print(mean_std_inotify)
 
   plt.figure(figsize=(8,5))
-  plt.grid(axis='y', linestyle='solid', linewidth=1.25)
+  #plt.grid(axis='y', linestyle='solid', linewidth=1.25)
+  plt.grid(axis='y', linestyle='-', color='lightgray')
   plt.gca().set_axisbelow(True)
   total_access = plt.axhline(10000, linestyle='dashed', linewidth=1, color='red', label='Normal Access Count')
   plt.bar(['eBPF', 'Inotify'], [mean_ebpf, mean_inotify], color='lightgray', edgecolor='black', yerr=errors, capsize=7)
