@@ -253,3 +253,6 @@ time=2024-01-30T14:57:16.067-03:00 level=INFO msg=List api=signer type=request m
 time=2024-01-30T14:57:18.251-03:00 level=INFO msg=List api=signer type=response data=[0x65BbACef21EC52B240538497441B9DfF24BF839a]
 time=2024-01-30T14:57:18.252-03:00 level=INFO msg=SignTransaction api=signer type=request metadata="{\"remote\":\"NA\",\"local\":\"NA\",\"scheme\":\"ipc\",\"User-Agent\":\"\",\"Origin\":\"\"}" tx="{\"from\":\"0x65BbACef21EC52B240538497441B9DfF24BF839a\",\"to\":\"0x2854fA282364A80f979b2024259AEB16b9e9348C\",\"gas\":\"0x5208\",\"gasPrice\":\"0x3b9aca00\",\"maxFeePerGas\":null,\"maxPriorityFeePerGas\":null,\"value\":\"0x2710\",\"nonce\":\"0x29\",\"data\":\"0x\",\"chainId\":\"0x1d9d0d8\"}" methodSelector=<nil>
 time=2024-01-30T14:57:20.172-03:00 level=INFO msg=SignTransaction api=signer type=response data=f86929843b9aca00825208942854fa282364a80f979b2024259aeb16b9e9348c822710808403b3a1d4a042b4461abce8787894c33c7e7d857e949467d690d10f07ac80e82b61b2d6f826a01c39574a7255dd7322f30d296cd80064bcbea507594e23eb577cefb59947bd24 error=<nil>
+time=2024-01-30T15:21:34.805-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log
+time=2024-01-30T15:54:48.950-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log
+time=2024-01-31T09:12:16.114-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log

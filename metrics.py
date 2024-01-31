@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 test_type_file = open('./tests/test_type.txt','r')
 test_type = test_type_file.read()
 
-test_type = 'access_time'
-test_type = 'overhead'
+#test_type = 'access_time'
 #test_type = 'access_fault'
+#test_type = 'overhead'
 
 if test_type == 'access_time':
   source_automated_tests_ebpf = "./tests/" + test_type + "/at_ebpf_" + test_type + ".csv"
@@ -29,8 +29,8 @@ if test_type == 'access_time':
   df['Diff_Inotify'] = vector_size
   df['Diff_eBPF'] = vector_size
 
-  df['Diff_Inotify'] = df['TS_Inotify'] - df['TS_Tests_Inotify']
-  df['Diff_eBPF'] = df['TS_eBPF'] - df['TS_Tests_eBPF']
+  df['Diff_Inotify'] = df['TS_Inotify'] - df['TS_AT_Inotify']
+  df['Diff_eBPF'] = df['TS_eBPF'] - df['TS_AT_eBPF']
 
   
   print(df.head())
@@ -104,7 +104,7 @@ if test_type == 'overhead':
   #plt.bar(['eBPF\nUnprotected','inotify\nUnprotected','eBPF\nProtected', 'inotify\nProtected'], [(.96*mean_e_np), (0.75*mean_i_np),(0.65*mean_e_p), (0.74*mean_i_p)], color='darkgray', width=0.78,  capsize=7)
   
 
-  plt.ylim(0, 10000)
+  plt.ylim(0, 50000)
 
   plt.xlabel("Type of Access")
   plt.ylabel("Time [ns]")
@@ -162,25 +162,25 @@ if test_type == 'access_fault':
   mean_std_inotify = math.sqrt((((df_inot_s1.size/2)-mean_inotify)**2 + ((df_inot_s2.size/2)-mean_inotify)**2 + ((df_inot_s3.size/2)-mean_inotify)**2)/3)
   errors = [mean_std_ebpf, mean_std_inotify]
 
-  print(mean_ebpf)
-  print(mean_inotify)
-  print(mean_std_ebpf)
-  print(mean_std_inotify)
+  print("Média eBPF: " + mean_ebpf)
+  print("Média Inotify: " + mean_inotify)
+  print("Desvio Padrão eBPF: " + mean_std_ebpf)
+  print("Desvio Padrão Inotify: " + mean_std_inotify)
 
   plt.figure(figsize=(8,5))
   #plt.grid(axis='y', linestyle='solid', linewidth=1.25)
   plt.grid(axis='y', linestyle='-', color='lightgray')
   plt.gca().set_axisbelow(True)
-  total_access = plt.axhline(10000, linestyle='dashed', linewidth=1, color='red', label='Normal Access Count')
+  total_access = plt.axhline(100000, linestyle='dashed', linewidth=1, color='red', label='Normal Access Count')
   plt.bar(['eBPF', 'Inotify'], [mean_ebpf, mean_inotify], color='lightgray', edgecolor='black', yerr=errors, capsize=7)
 
-  plt.ylim(0, 11000)
+  plt.ylim(0, 110000)
 
   plt.xlabel("Type of Access")
   plt.ylabel("Access Count Mean")
   plt.legend(handles=[total_access])
 
-  plt.text(-0.19, 10000 + 280, f'Total Access: 10000', color='red', fontsize=12, ha='center')
+  plt.text(-0.19, 100000 + 280, f'Total Access: 100000', color='red', fontsize=12, ha='center')
 
   #plt.show()
   plt.savefig("./tests/" + test_type + "/access_count.pdf")

@@ -3,7 +3,7 @@ teste 0 = comparcao entre abordagens (ambas on - 150us delay entre iteracoes)
 	rodar o programa de teste com ebpf (sem inotify)
 	plotar graficos
 
-teste 1 = comparcao entre abordagens (separadas - 150us delay entre iteracoes)
+teste 1 = (access time) comparcao entre abordagens (separadas - 150us delay entre iteracoes)
 	rodar o programa de teste com inotify (sem ebpf)
 	rodar o programa de teste com ebpf (sem inotify)
 	plotar graficos
@@ -13,7 +13,7 @@ teste 2 = overhead ebpf (150us delay entre iteracoes)
 	rodar o programa de teste com o ebpf
 	plotar graficos
 	
-teste 3 = taxa de falhas (sem delay entre as iteracoes)
+teste 3 = (access_fault) taxa de falhas (sem delay entre as iteracoes)
 	rodar o programa de teste sem ebpf/inotify
 	rodar o programa de teste com o ebpf/inotify
 	alterar nro de iteracoes

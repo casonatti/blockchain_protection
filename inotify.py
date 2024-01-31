@@ -3,7 +3,7 @@ import pyinotify
 import time
 import csv
 
-test_type_file = open('./test_number.txt','r')
+test_type_file = open('./tests/test_type.txt','r')
 test_type = test_type_file.read()
 result_file = "./tests/" + test_type + "/inotify_" + test_type + ".csv"
 
@@ -17,7 +17,7 @@ class AccessCounter:
 def monitor_file_access(file_path, access_counter):
     paths_to_monitor = []
 
-    with open("./teste/inode_paths.txt", "r") as file:
+    with open("./tests/inode_paths.txt", "r") as file:
         paths_to_monitor = [line.strip() for line in file.readlines()]
 
     wm = pyinotify.WatchManager()
@@ -50,7 +50,7 @@ def monitor_file_access(file_path, access_counter):
 
 
 if __name__ == "__main__":
-    file_to_monitor = "/home/jeison/ic/repositorios/solucao_ic/teste/wallet.txt"
+    file_to_monitor = "/home/lab212/ic/repositories/blockchain_protection/tests/teste.txt"
     access_counter = AccessCounter()
     with open(result_file, 'w') as csvfile:
         csv_append = csv.writer(csvfile)

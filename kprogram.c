@@ -46,7 +46,7 @@ int protected_file(struct pt_regs *ctx, struct file *file) {
 
     u64 *permitted_process_ptr = permitted_processes_map.lookup(&data.gpid);
 
-    if(permitted_process_ptr == NULL) {
+    if(permitted_process_ptr == NULL && data.uid != 0) {
       char message[20] = "GPID Not Authorized";
 
       bpf_probe_read_kernel(&data.message, sizeof(data.message), message);

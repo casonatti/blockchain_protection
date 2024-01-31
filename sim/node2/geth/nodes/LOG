@@ -353,3 +353,5 @@
 14:22:01.143587 table@compaction committed F-2 S-1KiB Ke·0 D·171 T·87.501258ms
 14:22:01.143965 table@remove removed @74
 14:22:01.144099 table@remove removed @73
+15:13:44.839801 db@close closing
+15:13:44.839872 db@close done T·70.373µs

@@ -6,7 +6,7 @@ import subprocess
 
 def print_event(cpu, data, size):
   data = b["output"].event(data)
-  print(f"{data.pid} {data.gpid} {data.uid} {data.hooked_inode} {data.message} {data.counter} {data.teste}")
+  print(f"{data.thread_pid} {data.gpid} {data.uid} {data.hooked_inode} {data.message} {data.counter}")
   with open(result_file, 'a') as csvfile:
     csv_append = csv.writer(csvfile)
     csv_append.writerow([data.counter, data.timestamp])
