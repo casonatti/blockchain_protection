@@ -14,7 +14,10 @@ def read_file_multiple_times(file_path, times):
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['Iteration','Elapsed_eBPF_NP'])
 
-        for i in range(times):
+        #for i in range(times): #comment for testing resource usage
+        i = - 1
+        while True:             #uncomment for testing resource usage
+            i = i + 1
             start = time.time_ns()
             with open(file_path, 'r') as file:
                 content = file.read()
@@ -24,8 +27,8 @@ def read_file_multiple_times(file_path, times):
             #formated_timestamp = f"{timestamp:.19}"
             csv_writer.writerow([i+1, elapsed])
 
-            # Introducing a delay of approximately 270 nanoseconds using timeit
-            timeit.timeit(lambda: None, number=270)  # Adjust number to control delay precision
+            # Introducing a delay of approximately 5 microseconds using timeit
+            timeit.timeit(lambda: None, number=5000)  # Adjust number to control delay precision
 
 def read_file_multiple_times_access_time(file_path, times):
     print("Automated Tests Initialized...")

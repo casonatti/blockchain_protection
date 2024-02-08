@@ -1,6 +1,7 @@
 import pandas as pd
 import math
 import matplotlib.pyplot as plt
+import numpy as np
 
 test_type_file = open('./tests/test_type.txt','r')
 test_type = test_type_file.read()
@@ -124,8 +125,6 @@ if test_type == 'overhead':
   plt.savefig("./tests/" + test_type + "/overhead.pdf")
 
 if test_type == 'access_fault':
-  print(test_type)
-
   source_automated_tests_ebpf_s1 = "./tests/" + test_type + "/at_ebpf_sample_1_" + test_type + ".csv"
   source_automated_tests_ebpf_s2 = "./tests/" + test_type + "/at_ebpf_sample_2_" + test_type + ".csv"
   source_automated_tests_ebpf_s3 = "./tests/" + test_type + "/at_ebpf_sample_3_" + test_type + ".csv"
@@ -184,3 +183,44 @@ if test_type == 'access_fault':
 
   #plt.show()
   plt.savefig("./tests/" + test_type + "/access_count.pdf")
+
+if test_type == 'resource_usage':
+  source_at_s1 = "./tests/" + test_type + "/at_sample_" + test_type + ".csv"
+  source_scylla_s1 = "./tests/" + test_type + "/scylla_sample_" + test_type + ".csv"
+  source_inot_s1 = "./tests/" + test_type + "/inotify_sample_" + test_type + ".csv"
+
+  df1 = pd.read_csv(source_at_s1)
+  df2 = pd.read_csv(source_scylla_s1)
+  df3 = pd.read_csv(source_inot_s1)
+
+  merge_1 = pd.merge(df1, df2, on='Time')
+  df = pd.merge(merge_1, df3, on='Time')
+
+  print(df)
+
+  plt.figure(figsize=(8,5))
+
+  df_markers = df
+  df_markers = df_markers.groupby(np.arange(len(df_markers))//15).mean()
+
+  print(df_markers)
+
+  plt.plot(df_markers['Time'], df_markers['AT_CPU_USAGE'], '*', fillstyle='none', markersize=4, color='black', label='at', linestyle='solid', linewidth=.5)
+  plt.plot(df_markers['Time'], df_markers['INOTIFY_CPU_USAGE'], 's', fillstyle='none', markersize=4, color='gray', label='inotify', linestyle='solid', linewidth=.5)
+  plt.plot(df_markers['Time'], df_markers['SCYLLA_CPU_USAGE'], 'x', fillstyle='none', markersize=4, color='red', label='scylla', linestyle='dotted', linewidth=.5)
+  # plt.yticks(list(range(0,50,5)))
+  plt.legend()
+  plt.xlabel("Time[s]")
+  plt.ylabel("CPU Usage[%]")
+  plt.grid(axis='y', linestyle='--')
+  plt.savefig("./tests/" + test_type + "/cpu_usage.pdf")
+
+  plt.figure(figsize=(8,5))
+  plt.plot(df_markers['Time'], df_markers['AT_MEMORY_USAGE'], marker='*', fillstyle='none', markersize=4, color='black', label='at', linestyle='solid', linewidth=.5)
+  plt.plot(df_markers['Time'], df_markers['INOTIFY_MEMORY_USAGE'], marker='s', fillstyle='none', markersize=4, color='gray', label='inotify', linestyle='solid', linewidth=.5)
+  plt.plot(df_markers['Time'], df_markers['SCYLLA_MEMORY_USAGE'], marker='x', fillstyle='none', markersize=4, color='red', label='scylla', linestyle='dotted', linewidth=.5)
+  plt.legend()
+  plt.xlabel("Time[s]")
+  plt.ylabel("Memory Usage[%]")
+
+  plt.savefig("./tests/" + test_type + "/memory_usage.pdf")
