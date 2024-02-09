@@ -203,6 +203,11 @@ if test_type == 'resource_usage':
   df_markers = df
   df_markers = df_markers.groupby(np.arange(len(df_markers))//15).mean()
 
+  #uncomment for peak test graphs
+  df_markers['AT_CPU_USAGE'] = df_markers['AT_CPU_USAGE'].map({df_markers['AT_CPU_USAGE'].max():df['AT_CPU_USAGE'].max()}).fillna(df_markers['AT_CPU_USAGE'])
+  df_markers['INOTIFY_CPU_USAGE'] = df_markers['INOTIFY_CPU_USAGE'].map({df_markers['INOTIFY_CPU_USAGE'].max():df['INOTIFY_CPU_USAGE'].max()}).fillna(df_markers['INOTIFY_CPU_USAGE'])
+  df_markers['SCYLLA_CPU_USAGE'] = df_markers['SCYLLA_CPU_USAGE'].map({df_markers['SCYLLA_CPU_USAGE'].max():df['SCYLLA_CPU_USAGE'].max()}).fillna(df_markers['SCYLLA_CPU_USAGE'])
+
   print(df_markers)
 
   plt.plot(df_markers['Time'], df_markers['AT_CPU_USAGE'], '*', fillstyle='none', markersize=4, color='black', label='at', linestyle='solid', linewidth=.5)
