@@ -3,7 +3,7 @@ import psutil
 import time
 
 def monitor_cpu(interval):
-    with open("./tests/resource_usage/_sample_resource_usage.csv", 'w', newline='') as csvfile:
+    with open("./results/resource_usage/_sample_resource_usage.csv", 'w', newline='') as csvfile:
         csv_writer = csv.writer(csvfile)
         csv_writer.writerow(['Time','CPU_USAGE', 'MEMORY_USAGE'])
 

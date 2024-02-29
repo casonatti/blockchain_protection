@@ -2,11 +2,11 @@ import csv
 import time
 import timeit
 
-test_type_file = open('./tests/test_type.txt','r')
+test_type_file = open('./config/test_type.txt','r')
 test_type = test_type_file.read()
 
-file_path="./tests/wallet.txt"
-result_file = "./tests/" + test_type + "/at_" + test_type + ".csv"
+file_path="./wallet.txt"
+result_file = "./results/" + test_type + "/at_" + test_type + ".csv"
 
 def read_file_multiple_times(file_path, times):
     print("Automated Tests Initialized...")

@@ -3,7 +3,7 @@ import math
 import matplotlib.pyplot as plt
 import numpy as np
 
-test_type_file = open('./tests/test_type.txt','r')
+test_type_file = open('./config/test_type.txt','r')
 test_type = test_type_file.read()
 
 #test_type = 'access_time'
@@ -11,10 +11,10 @@ test_type = test_type_file.read()
 #test_type = 'overhead'
 
 if test_type == 'access_time':
-  source_automated_tests_ebpf = "./tests/" + test_type + "/at_ebpf_" + test_type + ".csv"
-  source_automated_tests_inotify = "./tests/" + test_type + "/at_inotify_" + test_type + ".csv"
-  source_ebpf = "./tests/" + test_type + "/ebpf_" + test_type + "_corrected.csv"
-  source_inofify = "./tests/" + test_type + "/inotify_" + test_type + ".csv"
+  source_automated_tests_ebpf = "./results/" + test_type + "/at_ebpf_" + test_type + ".csv"
+  source_automated_tests_inotify = "./results/" + test_type + "/at_inotify_" + test_type + ".csv"
+  source_ebpf = "./results/" + test_type + "/ebpf_" + test_type + "_corrected.csv"
+  source_inofify = "./results/" + test_type + "/inotify_" + test_type + ".csv"
 
   df1 = pd.read_csv(source_automated_tests_ebpf)
   df2 = pd.read_csv(source_automated_tests_inotify)
@@ -55,14 +55,14 @@ if test_type == 'access_time':
   plt.ylabel("Time [ns]")
   plt.tight_layout()
   #plt.show()
-  plt.savefig("./tests/" + test_type + "/ebpf_x_inotify.pdf")
+  plt.savefig("./results/" + test_type + "/ebpf_x_inotify.pdf")
 
 if test_type == 'overhead':
-  source_automated_tests = "./tests/" + test_type + "/at_without_" + test_type + ".csv"
-  source_ebpf = "./tests/" + test_type + "/at_ebpf_" + test_type + ".csv"
-  source_inotify = "./tests/" + test_type + "/at_inotify_" + test_type + ".csv"
-  source_p_ebpf = "./tests/" + test_type + "/at_p_ebpf_" + test_type + ".csv"
-  source_p_inotify = "./tests/" + test_type + "/at_p_inotify_" + test_type + ".csv"
+  source_automated_tests = "./results/" + test_type + "/at_without_" + test_type + ".csv"
+  source_ebpf = "./results/" + test_type + "/at_ebpf_" + test_type + ".csv"
+  source_inotify = "./results/" + test_type + "/at_inotify_" + test_type + ".csv"
+  source_p_ebpf = "./results/" + test_type + "/at_p_ebpf_" + test_type + ".csv"
+  source_p_inotify = "./results/" + test_type + "/at_p_inotify_" + test_type + ".csv"
   
 
   df1 = pd.read_csv(source_automated_tests)
@@ -122,21 +122,21 @@ if test_type == 'overhead':
 
   #plt.show()
   plt.tight_layout()
-  plt.savefig("./tests/" + test_type + "/overhead.pdf")
+  plt.savefig("./results/" + test_type + "/overhead.pdf")
 
 if test_type == 'access_fault':
-  source_automated_tests_ebpf_s1 = "./tests/" + test_type + "/at_ebpf_sample_1_" + test_type + ".csv"
-  source_automated_tests_ebpf_s2 = "./tests/" + test_type + "/at_ebpf_sample_2_" + test_type + ".csv"
-  source_automated_tests_ebpf_s3 = "./tests/" + test_type + "/at_ebpf_sample_3_" + test_type + ".csv"
-  source_automated_tests_inot_s1 = "./tests/" + test_type + "/at_inot_sample_1_" + test_type + ".csv"
-  source_automated_tests_inot_s2 = "./tests/" + test_type + "/at_inot_sample_2_" + test_type + ".csv"
-  source_automated_tests_inot_s3 = "./tests/" + test_type + "/at_inot_sample_3_" + test_type + ".csv"
-  source_ebpf_s1 = "./tests/" + test_type + "/ebpf_sample_1_" + test_type + "_corrected.csv"
-  source_ebpf_s2 = "./tests/" + test_type + "/ebpf_sample_2_" + test_type + "_corrected.csv"
-  source_ebpf_s3 = "./tests/" + test_type + "/ebpf_sample_3_" + test_type + "_corrected.csv"
-  source_inot_s1 = "./tests/" + test_type + "/inotify_sample_1_" + test_type + ".csv"
-  source_inot_s2 = "./tests/" + test_type + "/inotify_sample_2_" + test_type + ".csv"
-  source_inot_s3 = "./tests/" + test_type + "/inotify_sample_3_" + test_type + ".csv"
+  source_automated_tests_ebpf_s1 = "./results/" + test_type + "/at_ebpf_sample_1_" + test_type + ".csv"
+  source_automated_tests_ebpf_s2 = "./results/" + test_type + "/at_ebpf_sample_2_" + test_type + ".csv"
+  source_automated_tests_ebpf_s3 = "./results/" + test_type + "/at_ebpf_sample_3_" + test_type + ".csv"
+  source_automated_tests_inot_s1 = "./results/" + test_type + "/at_inot_sample_1_" + test_type + ".csv"
+  source_automated_tests_inot_s2 = "./results/" + test_type + "/at_inot_sample_2_" + test_type + ".csv"
+  source_automated_tests_inot_s3 = "./results/" + test_type + "/at_inot_sample_3_" + test_type + ".csv"
+  source_ebpf_s1 = "./results/" + test_type + "/ebpf_sample_1_" + test_type + "_corrected.csv"
+  source_ebpf_s2 = "./results/" + test_type + "/ebpf_sample_2_" + test_type + "_corrected.csv"
+  source_ebpf_s3 = "./results/" + test_type + "/ebpf_sample_3_" + test_type + "_corrected.csv"
+  source_inot_s1 = "./results/" + test_type + "/inotify_sample_1_" + test_type + ".csv"
+  source_inot_s2 = "./results/" + test_type + "/inotify_sample_2_" + test_type + ".csv"
+  source_inot_s3 = "./results/" + test_type + "/inotify_sample_3_" + test_type + ".csv"
 
 
   df_at_e_s1 = pd.read_csv(source_automated_tests_ebpf_s1)
@@ -182,12 +182,12 @@ if test_type == 'access_fault':
   plt.text(-0.19, 100000 + 280, f'Total Access: 100000', color='red', fontsize=12, ha='center')
 
   #plt.show()
-  plt.savefig("./tests/" + test_type + "/access_count.pdf")
+  plt.savefig("./results/" + test_type + "/access_count.pdf")
 
 if test_type == 'resource_usage':
-  source_at_s1 = "./tests/" + test_type + "/at_sample_" + test_type + ".csv"
-  source_scylla_s1 = "./tests/" + test_type + "/scylla_sample_" + test_type + ".csv"
-  source_inot_s1 = "./tests/" + test_type + "/inotify_sample_" + test_type + ".csv"
+  source_at_s1 = "./results/" + test_type + "/at_sample_" + test_type + ".csv"
+  source_scylla_s1 = "./results/" + test_type + "/scylla_sample_" + test_type + ".csv"
+  source_inot_s1 = "./results/" + test_type + "/inotify_sample_" + test_type + ".csv"
 
   df1 = pd.read_csv(source_at_s1)
   df2 = pd.read_csv(source_scylla_s1)
@@ -218,7 +218,7 @@ if test_type == 'resource_usage':
   plt.xlabel("Time[s]")
   plt.ylabel("CPU Usage[%]")
   plt.grid(axis='y', linestyle='--')
-  plt.savefig("./tests/" + test_type + "/cpu_usage.pdf")
+  plt.savefig("./results/" + test_type + "/cpu_usage.pdf")
 
   plt.figure(figsize=(8,5))
   plt.plot(df_markers['Time'], df_markers['AT_MEMORY_USAGE'], marker='*', fillstyle='none', markersize=4, color='black', label='at', linestyle='solid', linewidth=.5)
@@ -228,4 +228,4 @@ if test_type == 'resource_usage':
   plt.xlabel("Time[s]")
   plt.ylabel("Memory Usage[%]")
 
-  plt.savefig("./tests/" + test_type + "/memory_usage.pdf")
+  plt.savefig("./results/" + test_type + "/memory_usage.pdf")
