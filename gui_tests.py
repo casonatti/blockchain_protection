@@ -1,73 +1,70 @@
-import gi
+# import gi
+# gi.require_version('Gtk', '3.0')
+# from gi.repository import Gtk
 
-gi.require_version("Gtk", "3.0")
+# from matplotlib.backends.backend_gtk3agg import (
+#     FigureCanvasGTK3Agg as FigureCanvas)
+# from matplotlib.figure import Figure
+# import numpy as np
+
+# win = Gtk.Window()
+# win.connect("delete-event", Gtk.main_quit)
+# win.set_default_size(400, 300)
+# win.set_title("Embedding in GTK")
+
+# f = Figure(figsize=(5, 4), dpi=100)
+# a = f.add_subplot(111)
+# t = np.arange(0.0, 3.0, 0.01)
+# s = np.sin(2*np.pi*t)
+# a.plot(t, s)
+
+# sw = Gtk.ScrolledWindow()
+# win.add(sw)
+# # A scrolled window border goes outside the scrollbars and viewport
+# sw.set_border_width(10)
+
+# canvas = FigureCanvas(f)  # a Gtk.DrawingArea
+# canvas.set_size_request(800, 600)
+# sw.add_with_viewport(canvas)
+
+# win.show_all()
+# Gtk.main()
+
+import gi
+gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-# list of tuples for each software, containing the software name, initial release, and main programming languages used
-software_list = [
-    ("","Firefox", 2002),
-    ("","Eclipse", 2004),
-    ("","Pitivi", 2004),
-    ("","Netbeans", 1996),
-    ("","Chrome", 2008),
-    ("","Filezilla", 2001),
-    ("","Bazaar", 2005),
-    ("","Git", 2005),
-    ("","Linux Kernel", 1991),
-    ("","GCC", 1987),
-    ("","Frostwire", 2004),
-]
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_gtk3agg import FigureCanvasGTK3Agg as FigureCanvas
 
-
-class TreeViewFilterWindow(Gtk.Window):
+class GraphWindow(Gtk.Window):
     def __init__(self):
-        super().__init__(title="Treeview Filter Demo")
-        self.set_border_width(10)
-        self.set_default_size(500,500)
+        Gtk.Window.__init__(self, title="Graph with PyGTK3 and Matplotlib")
+        self.set_default_size(800, 600)
 
-        # Setting up the self.grid in which the elements are to be positioned
-        self.grid = Gtk.Grid()
-        self.grid.set_column_homogeneous(True)
-        self.grid.set_row_homogeneous(True)
-        self.add(self.grid)
+        # Create a Gtk.Paned widget
+        self.paned = Gtk.Paned()
+        self.add(self.paned)
 
-        # Creating the ListStore model
-        self.software_liststore = Gtk.ListStore(str, str, int)
-        for software_ref in software_list:
-            self.software_liststore.append(list(software_ref))
+        # Create Matplotlib Figure and Axes
+        self.figure = Figure(figsize=(5, 4), dpi=100)
+        self.ax = self.figure.add_subplot(111)
+        self.ax.plot([1, 2, 3, 4], [10, 20, 25, 30], linestyle='-')
 
-        # creating the treeview, making it use the filter as a model, and adding the columns
-        self.treeview = Gtk.TreeView(model=self.software_liststore)
+        # Create a canvas to display the Matplotlib plot
+        self.canvas = FigureCanvas(self.figure)
+        self.paned.add1(self.canvas)
 
-        for i, column_title in enumerate(
-            [None,"Software", "Release Year"]
-        ):
-            renderer = Gtk.CellRendererText()
-            self.cell = Gtk.CellRendererToggle()
-            self.tvcolumn = Gtk.TreeViewColumn(column_title, renderer, text=i)
-            if column_title == None:
-                self.tvcolumn.pack_start(self.cell, True)
-            self.treeview.append_column(self.tvcolumn)
+        # Create a label for the title
+        self.title_label = Gtk.Label(label="Graph Title")
+        self.title_label.set_halign(Gtk.Align.CENTER)
+        self.paned.add2(self.title_label)
 
-        # setting up the layout, putting the treeview in a scrollwindow, and the buttons in a row
-        self.scrollable_treelist = Gtk.ScrolledWindow()
-        self.scrollable_treelist.set_vexpand(True)
-        self.grid.attach(self.scrollable_treelist, 0, 0, 8, 10)
-        
-        self.scrollable_treelist.add(self.treeview)
+        # Set the position of the separator
+        self.paned.set_position(400)
 
-        self.show_all()
-
-    def on_selection_button_clicked(self, widget):
-        """Called on any of the button clicks"""
-        # we set the current language filter to the button's label
-        self.current_filter_language = widget.get_label()
-        print("%s language selected!" % self.current_filter_language)
-        # we update the filter, which updates in turn the view
-        self.language_filter.refilter()
-
-
-win = TreeViewFilterWindow()
+win = GraphWindow()
 win.connect("destroy", Gtk.main_quit)
 win.show_all()
 Gtk.main()
