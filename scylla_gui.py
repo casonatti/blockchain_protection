@@ -40,16 +40,16 @@ class ScyllaGUI(Gtk.Window):
     notebook = Gtk.Notebook()
 
     log_page = Gtk.ScrolledWindow()
-    log_buffer = Gtk.TextBuffer()
-    log_textview = Gtk.TextView(buffer=log_buffer)
+    self.log_buffer = Gtk.TextBuffer()
+    log_textview = Gtk.TextView(buffer=self.log_buffer)
 
     graph_page = Gtk.Box()
 
     status_vbox = Gtk.Box(orientation="vertical")
     prot_files_vbox = Gtk.Box(orientation="vertical")
-    switch = Gtk.Switch()
-    add_file_btn = Gtk.Button(label="Add")
-    remove_file_btn = Gtk.Button(label="Remove")
+    self.switch = Gtk.Switch()
+    self.add_file_btn = Gtk.Button(label="Add")
+    self.remove_file_btn = Gtk.Button(label="Remove")
 
     # Setting parameters
     hpaned.set_position(320)
@@ -67,18 +67,21 @@ class ScyllaGUI(Gtk.Window):
 
     scrollable_treelist.set_vexpand(True)
 
-    switch.connect("notify::active", self.on_switch_activated)
-    switch.set_active(False)
-    switch.set_halign(3)
-    switch.set_margin_bottom(10)
+    if len(prot_files) == 0:
+      self.switch.set_sensitive(False)
 
-    add_file_btn.connect("clicked", self.add_files)
-    remove_file_btn.connect("clicked", self.remove_files)
+    self.switch.connect("notify::active", self.on_switch_activated)
+    self.switch.set_active(False)
+    self.switch.set_halign(3)
+    self.switch.set_margin_bottom(10)
+
+    self.add_file_btn.connect("clicked", self.add_files)
+    self.remove_file_btn.connect("clicked", self.remove_files)
 
     log_page.set_border_width(5)
 
     # TODO remove
-    log_buffer.set_text(log_str)
+    self.log_buffer.set_text(log_str)
 
     log_textview.set_editable(False)
     log_textview.set_cursor_visible(False)
@@ -105,12 +108,12 @@ class ScyllaGUI(Gtk.Window):
 
     grid_prot_files.attach(scrollable_treelist, 0, 0, 8, 10)
     
-    grid_btn.add(add_file_btn)
-    grid_btn.attach(remove_file_btn, 1, 0, 1, 1)
+    grid_btn.add(self.add_file_btn)
+    grid_btn.attach(self.remove_file_btn, 1, 0, 1, 1)
 
     label = Gtk.Label(label="Scylla Status")
     status_vbox.pack_start(label, True, True, 1)
-    status_vbox.pack_start(switch, False, False, 1)
+    status_vbox.pack_start(self.switch, False, False, 1)
     vpaned_status.pack1(status_vbox, False, False)
 
     label = Gtk.Label(label="Clef PID:\nXXXX")
@@ -144,8 +147,12 @@ class ScyllaGUI(Gtk.Window):
   # Elements functions
   def on_switch_activated(self, switch, gparam):
     if switch.get_active():
+      self.add_file_btn.set_sensitive(False)
+      self.remove_file_btn.set_sensitive(False)
       state = "ON"
     else:
+      self.add_file_btn.set_sensitive(True)
+      self.remove_file_btn.set_sensitive(True)
       state = "OFF"
 
     print("Switch was turned", state)
@@ -156,33 +163,51 @@ class ScyllaGUI(Gtk.Window):
       self.prot_files_list[iter][0] = not self.prot_files_list[iter][0]
 
   def add_files(self, button):
-    dialog = Gtk.FileChooserDialog(title="Select a file to protect", parent=self, action=Gtk.FileChooserAction.OPEN)
-    dialog.add_buttons(
-      Gtk.STOCK_CANCEL,
-      Gtk.ResponseType.CANCEL,
-      Gtk.STOCK_OPEN,
-      Gtk.ResponseType.OK,
-    )
+    if not self.switch.get_active():
+      dialog = Gtk.FileChooserDialog(title="Select a file to protect", parent=self, action=Gtk.FileChooserAction.OPEN)
+      dialog.add_buttons(
+        Gtk.STOCK_CANCEL,
+        Gtk.ResponseType.CANCEL,
+        Gtk.STOCK_OPEN,
+        Gtk.ResponseType.OK,
+      )
 
-    response = dialog.run()
+      response = dialog.run()
 
-    if response == Gtk.ResponseType.OK:
-      filename = dialog.get_filename().split('/')[-1]
-      inode = os.stat(dialog.get_filename()).st_ino
-      self.prot_files_list.append([False, inode, filename])
+      if response == Gtk.ResponseType.OK:
+        filename = dialog.get_filename().split('/')[-1]
+        inode = os.stat(dialog.get_filename()).st_ino
 
-      print("Adding file: " + filename + ", Inode: " + str(inode))
+        repeated_inode = False
 
-    dialog.destroy()
+        for path in range(len(self.prot_files_list)):
+          iter = self.prot_files_list.get_iter(path)
+          temp = self.prot_files_list[iter][1]
+
+          if inode != 0 and temp == inode:
+            repeated_inode = True
+            print("Failed to add file. Repeated Inode.")
+
+        if not repeated_inode:
+          self.prot_files_list.append([False, inode, filename])
+          print("Adding file [" + filename + "] to the list.")
+
+      if len(self.prot_files_list) != 0:
+        self.switch.set_sensitive(True)
+
+      dialog.destroy()
 
   def remove_files(self, button):
     for path in reversed(range(len(self.prot_files_list))):
       iter = self.prot_files_list.get_iter(path)
 
       if self.prot_files_list[iter][0]:
-        temp = self.prot_files_list[iter]
+        temp = self.prot_files_list[iter][2]
         self.prot_files_list.remove(iter)
-        print("Deleted", temp)
+        print("Removed file [" + str(temp) + "] from the list.")
+
+    if len(self.prot_files_list) == 0:
+      self.switch.set_sensitive(False)
 
   def plot_graph(self):
     figure = Figure(figsize=(5, 4), dpi=100)
@@ -192,6 +217,7 @@ class ScyllaGUI(Gtk.Window):
     canvas = FigureCanvas(figure)
 
     return canvas
+  
 
 win = ScyllaGUI()
 win.connect("destroy", Gtk.main_quit)
