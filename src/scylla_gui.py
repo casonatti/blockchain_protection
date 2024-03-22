@@ -1,23 +1,30 @@
 import gi
 import os
+from Log import *
+import subprocess
+import threading
+import time
 
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, Gio
+from gi.repository import Gtk, GLib
 
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_gtk3agg import FigureCanvasGTK3Agg as FigureCanvas
 
-# TODO remove
-prot_files = []
-
-# TODO remove
-log_str = ">>>> This is a log :D"
+# Global Var
+clef_gpid = 0
+textview_buffer = []
+log = Log()
+prot_files = [] # TODO is global var?
 
 class ScyllaGUI(Gtk.Window):
   def __init__(self):
     super().__init__(title="Scylla")
+
+    global clef_gpid
+    global textview_buffer
 
     # Main Window config
     self.set_border_width(5)
@@ -37,13 +44,13 @@ class ScyllaGUI(Gtk.Window):
 
     self.prot_files_treeview = Gtk.TreeView(model=self.prot_files_list)
 
-    scrollable_treelist = Gtk.ScrolledWindow()
+    self.scrollable_treelist = Gtk.ScrolledWindow()
 
     notebook = Gtk.Notebook()
 
     log_page = Gtk.ScrolledWindow()
     self.log_buffer = Gtk.TextBuffer()
-    log_textview = Gtk.TextView(buffer=self.log_buffer)
+    self.log_textview = Gtk.TextView(buffer=self.log_buffer)
 
     graph_page = Gtk.Box()
 
@@ -67,7 +74,7 @@ class ScyllaGUI(Gtk.Window):
     grid_btn.set_column_homogeneous(True)
     grid_btn.set_margin_right(5)
 
-    scrollable_treelist.set_vexpand(True)
+    self.scrollable_treelist.set_vexpand(True)
 
     if len(prot_files) == 0:
       self.switch.set_sensitive(False)
@@ -82,12 +89,13 @@ class ScyllaGUI(Gtk.Window):
 
     log_page.set_border_width(5)
 
-    # TODO remove
-    self.log_buffer.set_text(log_str)
+    self.log_textview.set_editable(False)
+    self.log_textview.set_cursor_visible(False)
+    self.log_textview.set_wrap_mode(Gtk.WrapMode.WORD)
 
-    log_textview.set_editable(False)
-    log_textview.set_cursor_visible(False)
-    log_textview.set_wrap_mode(Gtk.WrapMode.WORD)
+    # log_iter_end = self.log_buffer.get_end_iter()
+    # log_mark_end = self.log_buffer.create_mark("", log_iter_end, False)
+    self.log_buffer_line_limit = 200
 
     # Adding elements
     hpaned.pack1(vpaned_status, False, False)
@@ -106,9 +114,9 @@ class ScyllaGUI(Gtk.Window):
         tvcolumn = Gtk.TreeViewColumn(column_title, text_renderer, text=i)
       self.prot_files_treeview.append_column(tvcolumn)
 
-    scrollable_treelist.add(self.prot_files_treeview)
+    self.scrollable_treelist.add(self.prot_files_treeview)
 
-    grid_prot_files.attach(scrollable_treelist, 0, 0, 8, 10)
+    grid_prot_files.attach(self.scrollable_treelist, 0, 0, 8, 10)
     
     grid_btn.add(self.add_file_btn)
     grid_btn.attach(self.remove_file_btn, 1, 0, 1, 1)
@@ -118,7 +126,7 @@ class ScyllaGUI(Gtk.Window):
     status_vbox.pack_start(self.switch, False, False, 1)
     vpaned_status.pack1(status_vbox, False, False)
 
-    label = Gtk.Label(label="Clef PID:\nXXXX")
+    label = Gtk.Label(label=f"Clef PID:\n{clef_gpid}")
     vpaned_prot_files.pack1(label, False, False)
 
     label = Gtk.Label(label="Protected Files")
@@ -130,7 +138,7 @@ class ScyllaGUI(Gtk.Window):
 
     vpaned_status.pack2(vpaned_prot_files, True, True)
 
-    log_page.add(log_textview)
+    log_page.add(self.log_textview)
 
     canvas = self.plot_graph()
 
@@ -146,6 +154,10 @@ class ScyllaGUI(Gtk.Window):
 
     self.add(hpaned)
 
+    self.feed_log()
+
+    self.timeout_id = GLib.timeout_add(300, self.feed_log)
+
     super().show_all()
 
   # Elements functions
@@ -153,13 +165,13 @@ class ScyllaGUI(Gtk.Window):
     if switch.get_active():
       self.add_file_btn.set_sensitive(False)
       self.remove_file_btn.set_sensitive(False)
-      state = "ON"
+      state = "Scylla turned ON"
     else:
       self.add_file_btn.set_sensitive(True)
       self.remove_file_btn.set_sensitive(True)
-      state = "OFF"
+      state = "Scylla turned OFF"
 
-    print("Switch was turned", state)
+    log.append(state)
 
   def on_button_toggled(self, cell_renderer, path):
     iter = self.prot_files_list.get_iter(path)
@@ -194,7 +206,8 @@ class ScyllaGUI(Gtk.Window):
 
         if not repeated_inode:
           self.prot_files_list.append([False, inode, filename])
-          print("Adding file [" + filename + "] to the list.")
+          log_message = "Adding file [" + filename + "] to the list."
+          log.append(log_message)
 
       if len(self.prot_files_list) != 0:
         self.switch.set_sensitive(True)
@@ -208,10 +221,28 @@ class ScyllaGUI(Gtk.Window):
       if self.prot_files_list[iter][0]:
         temp = self.prot_files_list[iter][2]
         self.prot_files_list.remove(iter)
-        print("Removed file [" + str(temp) + "] from the list.")
+        log_message = "Removed file [" + str(temp) + "] from the list."
+        log.append(log_message)
 
     if len(self.prot_files_list) == 0:
       self.switch.set_sensitive(False)
+
+  def feed_log(self):
+    while len(textview_buffer) > 0:
+      if self.log_buffer.get_line_count() >= self.log_buffer_line_limit:
+        iter_start = self.log_buffer.get_start_iter()
+        iter_end_line = iter_start.copy()
+        iter_end_line.forward_to_line_end()
+        self.log_buffer.delete(iter_start, iter_end_line)
+
+      iter_end = self.log_buffer.get_end_iter()
+      self.log_buffer.insert(iter_end, textview_buffer[0])
+      textview_buffer.pop(0)
+      self.log_mark_end = self.log_buffer.create_mark("", iter_end, False)
+    
+    self.log_textview.scroll_to_mark(self.log_mark_end, 0, False, 0, 0)
+
+    return True
 
   def plot_graph(self):
     figure = Figure(figsize=(5, 4), dpi=100)
@@ -222,11 +253,46 @@ class ScyllaGUI(Gtk.Window):
 
     return canvas
   
+def get_clef_gpid():
+  global clef_gpid
+  try:
+    clef_gpid_search = subprocess.run(["ps", "-e", "-o", "pid,comm"], stdout=subprocess.PIPE, text=True, check=True) # Run the ps command to get information about processes with the specified command name
+    lines = clef_gpid_search.stdout.strip().split('\n')
+    clef_gpid = [int(line.split()[0]) for line in lines[1:] if line.split()[-1] == 'clef'] # Split the output into lines and extract the PIDs for the specified program name
+    with open('../evaluation/config/permitted_pids.txt', 'w') as file:
+      file.write(str(clef_gpid[0]))
+  except subprocess.CalledProcessError:
+    print(f"Error retrieving PIDs for 'clef'.")
+    exit()
+  
 def main():
-    ScyllaGUI()
-    Gtk.main()
-    return 0
+  global textview_buffer
 
+  get_clef_gpid()
+
+  log.config_initialization(textview_buffer)
+
+  threads = []
+
+  reading_thread = threading.Thread(target=log.read_log_file, args=(textview_buffer,), name="Reading_Thread", daemon=True)
+  threads.append(reading_thread)
+
+  writing_thread = threading.Thread(target=log.write_log_file, name="Writing_Thread", daemon=True)
+  threads.append(writing_thread)
+
+  for thread in threads:
+    thread.start()
+
+  time.sleep(1)
+
+  ScyllaGUI()
+
+  Gtk.main()
+
+  # for thread in threads:
+  #   thread.join()
+  
+  return 0
 
 if __name__ == '__main__':
-    main()
+  main()

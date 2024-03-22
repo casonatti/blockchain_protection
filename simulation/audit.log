@@ -352,3 +352,5 @@ time=2024-02-07T13:34:01.679-03:00 level=INFO msg=Configured api=signer "audit l
 time=2024-02-08T08:25:20.064-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log
 time=2024-02-29T12:30:55.478-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log
 time=2024-03-04T13:56:20.327-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log
+time=2024-03-22T10:42:39.642-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log
+time=2024-03-22T10:46:17.435-03:00 level=INFO msg=Configured api=signer "audit log"=audit.log

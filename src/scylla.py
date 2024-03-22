@@ -8,10 +8,10 @@ import subprocess
 def print_event(cpu, data, size):
   data = b["output"].event(data)
   #print(f"{data.thread_pid} {data.gpid} {data.uid} {data.hooked_inode} {data.message} {data.counter}")
-  with open(result_file, 'a') as csvfile:
-    csv_append = csv.writer(csvfile)
-    csv_append.writerow([data.counter, data.timestamp])
-    csvfile.close()
+  # with open(result_file, 'a') as csvfile:
+  #   csv_append = csv.writer(csvfile)
+  #   csv_append.writerow([data.counter, data.timestamp])
+  #   csvfile.close()
 
 # Get timestamp epoch at the boot time (bcc only offers timestamp counting since boot)
 current_epoch_ts = time.time_ns()
@@ -19,20 +19,20 @@ boot_relative_ts = time.monotonic_ns()
 boot_epoch_ts = current_epoch_ts - boot_relative_ts
 
 # Evaluation purpose
-test_type_file = open('../evaluation/config/test_type.txt','r')
-test_type = test_type_file.read()
-result_file = "../evaluation/results/" + test_type + "/ebpf_" + test_type + ".csv"
+# test_type_file = open('../evaluation/config/test_type.txt','r')
+# test_type = test_type_file.read()
+# result_file = "../evaluation/results/" + test_type + "/ebpf_" + test_type + ".csv"
 
 # Get clef GPID
-try:
-  clef_gpid_search = subprocess.run(["ps", "-e", "-o", "pid,comm"], stdout=subprocess.PIPE, text=True, check=True) # Run the ps command to get information about processes with the specified command name
-  lines = clef_gpid_search.stdout.strip().split('\n')
-  clef_gpid = [int(line.split()[0]) for line in lines[1:] if line.split()[-1] == 'clef'] # Split the output into lines and extract the PIDs for the specified program name
-  with open('../evaluation/config/permitted_pids.txt', 'w') as file:
-    file.write(str(clef_gpid[0]))
-except subprocess.CalledProcessError:
-  print(f"Error retrieving PIDs for 'clef'.")
-  exit()
+# try:
+#   clef_gpid_search = subprocess.run(["ps", "-e", "-o", "pid,comm"], stdout=subprocess.PIPE, text=True, check=True) # Run the ps command to get information about processes with the specified command name
+#   lines = clef_gpid_search.stdout.strip().split('\n')
+#   clef_gpid = [int(line.split()[0]) for line in lines[1:] if line.split()[-1] == 'clef'] # Split the output into lines and extract the PIDs for the specified program name
+#   with open('../evaluation/config/permitted_pids.txt', 'w') as file:
+#     file.write(str(clef_gpid[0]))
+# except subprocess.CalledProcessError:
+#   print(f"Error retrieving PIDs for 'clef'.")
+#   exit()
 
 # Load eBPF program into de kernel and attach eBPF function to vfs_read syscall
 program = "readMonitor.c"
@@ -69,10 +69,10 @@ print("%-6s %-6s %-6s %-8s %-10s %-6s" % ("PID", "GPID", "UID", "INODE", "MESSAG
 b["output"].open_perf_buffer(print_event)
 
 # Evaluation purpose
-with open(result_file, 'w') as csvfile:
-    csv_append = csv.writer(csvfile)
-    csv_append.writerow(['Iteration','TS_eBPF'])
-    csvfile.close()
+# with open(result_file, 'w') as csvfile:
+#   csv_append = csv.writer(csvfile)
+#   csv_append.writerow(['Iteration','TS_eBPF'])
+#   csvfile.close()
 
 # Keep on checking for new data
 while True:
