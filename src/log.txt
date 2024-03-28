@@ -1,450 +1,117 @@
->>>> This is feeding test #0
->>>> This is feeding test #1
->>>> This is feeding test #2
->>>> This is feeding test #3
->>>> This is feeding test #4
->>>> This is feeding test #5
->>>> This is feeding test #6
->>>> This is feeding test #7
->>>> This is feeding test #8
->>>> This is feeding test #9
->>>> This is feeding test #10
->>>> This is feeding test #11
->>>> This is feeding test #12
->>>> This is feeding test #13
->>>> This is feeding test #14
->>>> This is feeding test #15
->>>> This is feeding test #16
->>>> This is feeding test #17
->>>> This is feeding test #18
->>>> This is feeding test #19
->>>> This is feeding test #20
->>>> This is feeding test #21
->>>> This is feeding test #22
->>>> This is feeding test #23
->>>> This is feeding test #24
->>>> This is feeding test #25
->>>> This is feeding test #26
->>>> This is feeding test #27
->>>> This is feeding test #28
->>>> This is feeding test #29
->>>> This is feeding test #30
->>>> This is feeding test #31
->>>> This is feeding test #32
->>>> This is feeding test #33
->>>> This is feeding test #34
->>>> This is feeding test #35
->>>> This is feeding test #36
->>>> This is feeding test #37
->>>> This is feeding test #38
->>>> This is feeding test #39
->>>> This is feeding test #40
->>>> This is feeding test #41
->>>> This is feeding test #42
->>>> This is feeding test #43
->>>> This is feeding test #44
->>>> This is feeding test #45
->>>> This is feeding test #46
->>>> This is feeding test #47
->>>> This is feeding test #48
->>>> This is feeding test #49
->>>> This is feeding test #50
->>>> This is feeding test #51
->>>> This is feeding test #52
->>>> This is feeding test #53
->>>> This is feeding test #54
->>>> This is feeding test #55
->>>> This is feeding test #56
->>>> This is feeding test #57
->>>> This is feeding test #58
->>>> This is feeding test #59
->>>> This is feeding test #60
->>>> This is feeding test #61
->>>> This is feeding test #62
->>>> This is feeding test #63
->>>> This is feeding test #64
->>>> This is feeding test #65
->>>> This is feeding test #66
->>>> This is feeding test #67
->>>> This is feeding test #68
->>>> This is feeding test #69
->>>> This is feeding test #70
->>>> This is feeding test #71
->>>> This is feeding test #72
->>>> This is feeding test #73
->>>> This is feeding test #74
->>>> This is feeding test #75
->>>> This is feeding test #76
->>>> This is feeding test #77
->>>> This is feeding test #78
->>>> This is feeding test #79
->>>> This is feeding test #80
->>>> This is feeding test #81
->>>> This is feeding test #82
->>>> This is feeding test #83
->>>> This is feeding test #84
->>>> This is feeding test #85
->>>> This is feeding test #86
->>>> This is feeding test #87
->>>> This is feeding test #88
->>>> This is feeding test #89
->>>> This is feeding test #90
->>>> This is feeding test #91
->>>> This is feeding test #92
->>>> This is feeding test #93
->>>> This is feeding test #94
->>>> This is feeding test #95
->>>> This is feeding test #96
->>>> This is feeding test #97
->>>> This is feeding test #98
->>>> This is feeding test #99
->>>> This is feeding test #100
->>>> This is feeding test #101
->>>> This is feeding test #102
->>>> This is feeding test #103
->>>> This is feeding test #104
->>>> This is feeding test #105
->>>> This is feeding test #106
->>>> This is feeding test #107
->>>> This is feeding test #108
->>>> This is feeding test #109
->>>> This is feeding test #110
->>>> This is feeding test #111
->>>> This is feeding test #112
->>>> This is feeding test #113
->>>> This is feeding test #114
->>>> This is feeding test #115
->>>> This is feeding test #116
->>>> This is feeding test #117
->>>> This is feeding test #118
->>>> This is feeding test #119
->>>> This is feeding test #120
->>>> This is feeding test #121
->>>> This is feeding test #122
->>>> This is feeding test #123
->>>> This is feeding test #124
->>>> This is feeding test #125
->>>> This is feeding test #126
->>>> This is feeding test #127
->>>> This is feeding test #128
->>>> This is feeding test #129
->>>> This is feeding test #130
->>>> This is feeding test #131
->>>> This is feeding test #132
->>>> This is feeding test #133
->>>> This is feeding test #134
->>>> This is feeding test #135
->>>> This is feeding test #136
->>>> This is feeding test #137
->>>> This is feeding test #138
->>>> This is feeding test #139
->>>> This is feeding test #140
->>>> This is feeding test #141
->>>> This is feeding test #142
->>>> This is feeding test #143
->>>> This is feeding test #144
->>>> This is feeding test #145
->>>> This is feeding test #146
->>>> This is feeding test #147
->>>> This is feeding test #148
->>>> This is feeding test #149
->>>> This is feeding test #150
->>>> This is feeding test #151
->>>> This is feeding test #152
->>>> This is feeding test #153
->>>> This is feeding test #154
->>>> This is feeding test #155
->>>> This is feeding test #156
->>>> This is feeding test #157
->>>> This is feeding test #158
->>>> This is feeding test #159
->>>> This is feeding test #160
->>>> This is feeding test #161
->>>> This is feeding test #162
->>>> This is feeding test #163
->>>> This is feeding test #164
->>>> This is feeding test #165
->>>> This is feeding test #166
->>>> This is feeding test #167
->>>> This is feeding test #168
->>>> This is feeding test #169
->>>> This is feeding test #170
->>>> This is feeding test #171
->>>> This is feeding test #172
->>>> This is feeding test #173
->>>> This is feeding test #174
->>>> This is feeding test #175
->>>> This is feeding test #176
->>>> This is feeding test #177
->>>> This is feeding test #178
->>>> This is feeding test #179
->>>> This is feeding test #180
->>>> This is feeding test #181
->>>> This is feeding test #182
->>>> This is feeding test #183
->>>> This is feeding test #184
->>>> This is feeding test #185
->>>> This is feeding test #186
->>>> This is feeding test #187
->>>> This is feeding test #188
->>>> This is feeding test #189
->>>> This is feeding test #190
->>>> This is feeding test #191
->>>> This is feeding test #192
->>>> This is feeding test #193
->>>> This is feeding test #194
->>>> This is feeding test #195
->>>> This is feeding test #196
->>>> This is feeding test #197
->>>> This is feeding test #198
->>>> This is feeding test #199
->>>> This is feeding test #200
->>>> This is feeding test #201
->>>> This is feeding test #202
->>>> This is feeding test #203
->>>> This is feeding test #204
->>>> This is feeding test #205
->>>> This is feeding test #206
->>>> This is feeding test #207
->>>> This is feeding test #208
->>>> This is feeding test #209
->>>> This is feeding test #210
->>>> This is feeding test #211
->>>> This is feeding test #212
->>>> This is feeding test #213
->>>> This is feeding test #214
->>>> This is feeding test #215
->>>> This is feeding test #216
->>>> This is feeding test #217
->>>> This is feeding test #218
->>>> This is feeding test #219
->>>> This is feeding test #220
->>>> This is feeding test #221
->>>> This is feeding test #222
->>>> This is feeding test #223
->>>> This is feeding test #224
->>>> This is feeding test #225
->>>> This is feeding test #226
->>>> This is feeding test #227
->>>> This is feeding test #228
->>>> This is feeding test #229
->>>> This is feeding test #230
->>>> This is feeding test #231
->>>> This is feeding test #232
->>>> This is feeding test #233
->>>> This is feeding test #234
->>>> This is feeding test #235
->>>> This is feeding test #236
->>>> This is feeding test #237
->>>> This is feeding test #238
->>>> This is feeding test #239
->>>> This is feeding test #240
->>>> This is feeding test #241
->>>> This is feeding test #242
->>>> This is feeding test #243
->>>> This is feeding test #244
->>>> This is feeding test #245
->>>> This is feeding test #246
->>>> This is feeding test #247
->>>> This is feeding test #248
->>>> This is feeding test #249
->>>> This is feeding test #250
->>>> This is feeding test #251
->>>> This is feeding test #252
->>>> This is feeding test #253
->>>> This is feeding test #254
->>>> This is feeding test #255
->>>> This is feeding test #256
->>>> This is feeding test #257
->>>> This is feeding test #258
->>>> This is feeding test #259
->>>> This is feeding test #260
->>>> This is feeding test #261
->>>> This is feeding test #262
->>>> This is feeding test #263
->>>> This is feeding test #264
->>>> This is feeding test #265
->>>> This is feeding test #266
->>>> This is feeding test #267
->>>> This is feeding test #268
->>>> This is feeding test #269
->>>> This is feeding test #270
->>>> This is feeding test #271
->>>> This is feeding test #272
->>>> This is feeding test #273
->>>> This is feeding test #274
->>>> This is feeding test #275
->>>> This is feeding test #276
->>>> This is feeding test #277
->>>> This is feeding test #278
->>>> This is feeding test #279
->>>> This is feeding test #280
->>>> This is feeding test #281
->>>> This is feeding test #282
->>>> This is feeding test #283
->>>> This is feeding test #284
->>>> This is feeding test #285
->>>> This is feeding test #286
->>>> This is feeding test #287
->>>> This is feeding test #288
->>>> This is feeding test #289
->>>> This is feeding test #290
->>>> This is feeding test #291
->>>> This is feeding test #292
->>>> This is feeding test #293
->>>> This is feeding test #294
->>>> This is feeding test #295
->>>> This is feeding test #296
->>>> This is feeding test #297
->>>> This is feeding test #298
->>>> This is feeding test #299
->>>> This is feeding test #300
->>>> This is feeding test #301
->>>> This is feeding test #302
->>>> This is feeding test #303
->>>> This is feeding test #304
->>>> This is feeding test #305
->>>> This is feeding test #306
->>>> This is feeding test #307
->>>> This is feeding test #308
->>>> This is feeding test #309
->>>> This is feeding test #310
->>>> This is feeding test #311
->>>> This is feeding test #312
->>>> This is feeding test #313
->>>> This is feeding test #314
->>>> This is feeding test #315
->>>> This is feeding test #316
->>>> This is feeding test #317
->>>> This is feeding test #318
->>>> This is feeding test #319
->>>> This is feeding test #320
->>>> This is feeding test #321
->>>> This is feeding test #322
->>>> This is feeding test #323
->>>> This is feeding test #324
->>>> This is feeding test #325
->>>> This is feeding test #326
->>>> This is feeding test #327
->>>> This is feeding test #328
->>>> This is feeding test #329
->>>> This is feeding test #330
->>>> This is feeding test #331
->>>> This is feeding test #332
->>>> This is feeding test #333
->>>> This is feeding test #334
->>>> This is feeding test #335
->>>> This is feeding test #336
->>>> This is feeding test #337
->>>> This is feeding test #338
->>>> This is feeding test #339
->>>> This is feeding test #340
->>>> This is feeding test #341
->>>> This is feeding test #342
->>>> This is feeding test #343
->>>> This is feeding test #344
->>>> This is feeding test #345
->>>> This is feeding test #346
->>>> This is feeding test #347
->>>> This is feeding test #348
->>>> This is feeding test #349
->>>> This is feeding test #350
->>>> This is feeding test #351
->>>> This is feeding test #352
->>>> This is feeding test #353
->>>> This is feeding test #354
->>>> This is feeding test #355
->>>> This is feeding test #356
->>>> This is feeding test #357
->>>> This is feeding test #0
->>>> This is feeding test #1
->>>> This is feeding test #2
->>>> This is feeding test #3
->>>> This is feeding test #4
->>>> Scylla turned ON
->>>> Scylla turned OFF
 >>>> Adding file [log.txt] to the list.
->>>> Adding file [gui_tests.py] to the list.
->>>> Adding file [scylla_gui.py] to the list.
->>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Removed file [gui_tests.py] from the list.
->>>> Removed file [log.txt] from the list.
->>>> Removed file [scylla_gui.py] from the list.
->>>> Adding file [README.md] to the list.
->>>> Adding file [scylla_gui.py] to the list.
->>>> Scylla turned ON
->>>> Scylla turned OFF
+>>>> Adding file [scylla.py] to the list.
+>>>> Adding file [readMonitor.c] to the list.
 >>>> Adding file [Log.py] to the list.
->>>> Adding file [LICENSE] to the list.
->>>> Adding file [scylla_gui.py] to the list.
->>>> Adding file [README.md] to the list.
+>>>> Adding file [wallet.txt] to the list.
+>>>> Adding file [keystore.txt] to the list.
 >>>> Scylla turned ON
 >>>> Scylla turned OFF
->>>> Removed file [scylla_gui.py] from the list.
->>>> Removed file [LICENSE] from the list.
->>>> Removed file [README.md] from the list.
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> 16534 16534 1000 44311132 b'GPID Not Authorized' 0
+>>>> 16546 16546 0 44311132 b'Authorized' 1
+>>>> 16546 16546 0 44311132 b'Authorized' 2
+>>>> 16549 16549 1000 44311132 b'GPID Not Authorized' 0
+>>>> 16579 16579 1000 44311144 b'GPID Not Authorized' 0
+>>>> 16593 16593 0 44311144 b'Authorized' 3
+>>>> 16593 16593 0 44311144 b'Authorized' 4
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Removed file [keystore.txt] from the list.
+>>>> Removed file [wallet.txt] from the list.
+>>>> Removed file [wallet.txt] from the list.
+>>>> Removed file [44311144 wallet.txt] from the list.
+>>>> Removed file [44311144 wallet.txt
+] from the list.
+>>>> Removed file [44311132 keystore.txt
+] from the list.
+>>>> Adding file [main.py] to the list.
 >>>> Adding file [gui_tests.py] to the list.
->>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Adding file [gui_tests.py] to the list.
->>>> Adding file [LICENSE] to the list.
->>>> Adding file [scylla_gui.py] to the list.
->>>> Adding file [boot.key] to the list.
->>>> Adding file [logo.png] to the list.
->>>> Adding file [Log.cpython-310.pyc] to the list.
->>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Removed file [Log.cpython-310.pyc] from the list.
->>>> Removed file [logo.png] from the list.
->>>> Removed file [boot.key] from the list.
->>>> Removed file [scylla_gui.py] from the list.
->>>> Removed file [LICENSE] from the list.
 >>>> Removed file [gui_tests.py] from the list.
->>>> Adding file [gui_tests.py] to the list.
->>>> Adding file [boot.key] to the list.
->>>> Adding file [logo.png] to the list.
+>>>> Removed file [main.py] from the list.
+>>>> Adding file [wallet.txt] to the list.
+>>>> Adding file [keystore.txt] to the list.
+>>>> Scylla turned ON
+>>>> 18081 18081 0 44311144 b'Authorized' 1
+>>>> 18081 18081 0 44311144 b'Authorized' 2
+>>>> 18084 18084 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Removed file [wallet.txt] from the list.
+>>>> Scylla turned ON
+>>>> 18090 18090 1000 44311144 b'GPID Not Authorized' 0
+>>>> Adding file [wallet.txt] to the list.
+>>>> Scylla turned ON
+>>>> 18497 18497 1000 44311144 b'GPID Not Authorized' 0
+>>>> 18500 18500 0 44311144 b'Authorized' 1
+>>>> 18500 18500 0 44311144 b'Authorized' 2
+>>>> Removed file [wallet.txt] from the list.
+>>>> Scylla turned ON
+>>>> 18508 18508 0 44311144 b'Authorized' 3
+>>>> 18508 18508 0 44311144 b'Authorized' 4
+>>>> 18509 18509 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Adding file [wallet.txt] to the list.
+>>>> Scylla turned ON
+>>>> 19557 19557 1000 44311144 b'GPID Not Authorized' 0
+>>>> 19560 19560 0 44311144 b'Authorized' 1
+>>>> 19560 19560 0 44311144 b'Authorized' 2
+>>>> Removed file [wallet.txt] from the list.
+>>>> Scylla turned ON
+>>>> 19623 19623 0 44311144 b'Authorized' 3
+>>>> 19623 19623 0 44311144 b'Authorized' 4
+>>>> 19624 19624 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
 >>>> Scylla turned ON
 >>>> Scylla turned OFF
 >>>> Scylla turned ON
 >>>> Scylla turned OFF
->>>> Removed file [boot.key] from the list.
->>>> Adding file [Log.py] to the list.
->>>> Adding file [machine learning algorithms review.pdf] to the list.
->>>> Adding file [access_test.sh] to the list.
 >>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Removed file [machine learning algorithms review.pdf] from the list.
->>>> Adding file [log.txt] to the list.
->>>> Adding file [scylla_gui.py] to the list.
->>>> Removed file [scylla_gui.py] from the list.
->>>> Removed file [log.txt] from the list.
->>>> Adding file [Log.cpython-310.pyc] to the list.
->>>> Scylla turned ON
->>>> Scylla turned OFF
->>>> Removed file [Log.cpython-310.pyc] from the list.
->>>> Adding file [LICENSE] to the list.
->>>> Adding file [clef.txt] to the list.
 >>>> Scylla turned ON
 >>>> Scylla turned OFF
 >>>> Scylla turned ON
 >>>> Scylla turned OFF
->>>> Adding file [gui_tests.py] to the list.
->>>> Adding file [log.txt] to the list.
->>>> Adding file [scylla_gui.py] to the list.
->>>> Removed file [scylla_gui.py] from the list.
->>>> Removed file [log.txt] from the list.
->>>> Removed file [gui_tests.py] from the list.
->>>> Removed file [clef.txt] from the list.
->>>> Adding file [gui_tests.py] to the list.
->>>> Adding file [Log.py] to the list.
 >>>> Scylla turned ON
 >>>> Scylla turned OFF
->>>> Removed file [Log.py] from the list.
->>>> Removed file [gui_tests.py] from the list.
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> 25160 25160 1000 44311132 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> 25252 25252 1000 44311132 b'GPID Not Authorized' 0
+>>>> 25254 25254 1000 44311132 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Adding file [wallet.txt] to the list.
+>>>> Scylla turned ON
+>>>> 26637 26637 1000 44311132 b'GPID Not Authorized' 0
+>>>> 26667 26667 1000 44311144 b'GPID Not Authorized' 0
+>>>> 26683 26683 0 44311144 b'Authorized' 1
+>>>> 26683 26683 0 44311144 b'Authorized' 2
+>>>> Scylla turned OFF
+>>>> 26692 26692 0 44311144 b'Authorized' 3
+>>>> 26692 26692 0 44311144 b'Authorized' 4

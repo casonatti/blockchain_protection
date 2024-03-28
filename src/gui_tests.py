@@ -1,49 +1,64 @@
-#!/usr/bin/env python3
 import gi
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk
+from gi.repository import Gtk, GLib
 
-class TextView(Gtk.TextView):
-  def __init__(self):
-    Gtk.TextView.__init__(self)
-    # create mark for scrolling
-    text_buffer = self.get_buffer()
-    text_iter_end = text_buffer.get_end_iter()
-    self.text_mark_end = text_buffer.create_mark("", text_iter_end, False)
+class ScrollingTextView:
+    def __init__(self):
+        self.window = Gtk.Window()
+        self.window.set_title("Scrolling Text View Example")
+        self.window.set_default_size(300, 250)
+        self.window.connect("destroy", Gtk.main_quit)
 
-  def append_text(self, text):
-    # append text
-    text_buffer = self.get_buffer()
-    text_iter_end = text_buffer.get_end_iter()
-    text_buffer.insert(text_iter_end, text)
-    # now scroll using mark
-    self.scroll_to_mark(self.text_mark_end, 0, False, 0, 0)
+        self.textview = Gtk.TextView()
+        self.textview.set_wrap_mode(Gtk.WrapMode.WORD)
+        self.textview.set_editable(False)
+        self.textview.set_cursor_visible(False)
+        self.textview.set_border_width(5)
 
-class Window(Gtk.Window):
-  def __init__(self):
-    Gtk.Window.__init__(self)
-    self.set_title('Test GtkTextView scrolling')
-    self.set_default_size(400, 300)
+        self.scrolled_window = Gtk.ScrolledWindow()
+        self.scrolled_window.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        self.scrolled_window.add(self.textview)
 
-    self.grid = Gtk.Grid()
-    self.scrolled_win = Gtk.ScrolledWindow()
-    self.text_view = TextView()
-    self.button = Gtk.Button(label='Append text')
-    self.scrolled_win.set_hexpand(True)
-    self.scrolled_win.set_vexpand(True)
+        self.button = Gtk.Button(label="Insert 5 Lines")
+        self.button.connect("clicked", self.on_button_clicked)
 
-    self.scrolled_win.add(self.text_view)
-    self.grid.add(self.scrolled_win)
-    self.grid.add(self.button)
-    self.add(self.grid)
+        self.vbox = Gtk.VBox(spacing=6)
+        self.vbox.pack_start(self.scrolled_window, True, True, 0)
+        self.vbox.pack_start(self.button, False, False, 0)
 
-    self.connect('destroy', Gtk.main_quit)
-    self.button.connect('clicked', self.on_button_clicked)
-    self.show_all()
+        self.window.add(self.vbox)
+        self.window.show_all()
 
-  def on_button_clicked(self, widget):
-    self.text_view.append_text('Hello\n' * 5);
+        self.buffer = self.textview.get_buffer()
+        self.buffer.connect("insert-text", self.on_text_inserted)
 
-if __name__ == '__main__':
-  win = Window()
-  Gtk.main()
+        self.line_counter = 0
+
+    def on_text_inserted(self, buffer, iter, text, length):
+        self.line_counter += 1
+        GLib.idle_add(self.scroll_to_end)
+        GLib.idle_add(self.delete_excess_lines)
+
+    def on_button_clicked(self, button):
+        lines_to_insert = 5
+        for i in range(lines_to_insert):
+            self.line_counter += 1
+            line_text = f"Line {self.line_counter}\n"
+            self.buffer.insert_at_cursor(line_text)
+
+    def scroll_to_end(self):
+        # Scroll to the end of the buffer
+        self.textview.scroll_to_mark(self.buffer.get_insert(), 0.0, True, 0.0, 1.0)
+        return False
+
+    def delete_excess_lines(self):
+        start_iter = self.buffer.get_start_iter()
+        end_iter = self.buffer.get_end_iter()
+        line_count = self.buffer.get_line_count()
+        if line_count > 20:
+            self.buffer.delete(start_iter, self.buffer.get_iter_at_line(line_count - 20))
+        return False
+
+if __name__ == "__main__":
+    scrolling_text_view = ScrollingTextView()
+    Gtk.main()

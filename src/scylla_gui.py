@@ -1,10 +1,10 @@
 import gi
 import os
 from Log import *
+from scylla import *
 import subprocess
 import threading
 import time
-
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
@@ -17,7 +17,15 @@ from matplotlib.backends.backend_gtk3agg import FigureCanvasGTK3Agg as FigureCan
 clef_gpid = 0
 textview_buffer = []
 log = Log()
-prot_files = [] # TODO is global var?
+prot_files = []
+
+with open("../evaluation/config/protected_inodes.txt","r") as file:
+  for line in file.readlines():
+    temp = line.split()
+    prot_files.append([int(temp[0]), temp[1]])
+    # print(prot_files)
+
+file.close()
 
 class ScyllaGUI(Gtk.Window):
   def __init__(self):
@@ -93,8 +101,6 @@ class ScyllaGUI(Gtk.Window):
     self.log_textview.set_cursor_visible(False)
     self.log_textview.set_wrap_mode(Gtk.WrapMode.WORD)
 
-    # log_iter_end = self.log_buffer.get_end_iter()
-    # log_mark_end = self.log_buffer.create_mark("", log_iter_end, False)
     self.log_buffer_line_limit = 200
 
     # Adding elements
@@ -165,10 +171,12 @@ class ScyllaGUI(Gtk.Window):
     if switch.get_active():
       self.add_file_btn.set_sensitive(False)
       self.remove_file_btn.set_sensitive(False)
+      self.ebpf_thr = self.turn_on_scylla()
       state = "Scylla turned ON"
     else:
       self.add_file_btn.set_sensitive(True)
       self.remove_file_btn.set_sensitive(True)
+      self.turn_off_scylla()
       state = "Scylla turned OFF"
 
     log.append(state)
@@ -205,6 +213,10 @@ class ScyllaGUI(Gtk.Window):
             print("Failed to add file. Repeated Inode.")
 
         if not repeated_inode:
+          with open("../evaluation/config/protected_inodes.txt","a") as file:
+            text = str(inode) + ' ' + filename + '\n'
+            file.write(text)
+          file.close()
           self.prot_files_list.append([False, inode, filename])
           log_message = "Adding file [" + filename + "] to the list."
           log.append(log_message)
@@ -219,9 +231,22 @@ class ScyllaGUI(Gtk.Window):
       iter = self.prot_files_list.get_iter(path)
 
       if self.prot_files_list[iter][0]:
-        temp = self.prot_files_list[iter][2]
+        temp_inode = self.prot_files_list[iter][1]
+        temp_name = self.prot_files_list[iter][2]
         self.prot_files_list.remove(iter)
-        log_message = "Removed file [" + str(temp) + "] from the list."
+
+        text = str(temp_inode) + ' ' + str(temp_name) + '\n'
+        
+        with open("../evaluation/config/protected_inodes.txt","r+") as file:
+          lines = file.readlines()
+          file.seek(0)
+          for line in lines:
+            if line != text:
+              file.write(line)
+          file.truncate()
+          file.close()
+
+        log_message = "Removed file [" + str(temp_name) + "] from the list."
         log.append(log_message)
 
     if len(self.prot_files_list) == 0:
@@ -229,20 +254,24 @@ class ScyllaGUI(Gtk.Window):
 
   def feed_log(self):
     while len(textview_buffer) > 0:
-      if self.log_buffer.get_line_count() >= self.log_buffer_line_limit:
-        iter_start = self.log_buffer.get_start_iter()
-        iter_end_line = iter_start.copy()
-        iter_end_line.forward_to_line_end()
-        self.log_buffer.delete(iter_start, iter_end_line)
-
       iter_end = self.log_buffer.get_end_iter()
       self.log_buffer.insert(iter_end, textview_buffer[0])
       textview_buffer.pop(0)
-      self.log_mark_end = self.log_buffer.create_mark("", iter_end, False)
-    
-    self.log_textview.scroll_to_mark(self.log_mark_end, 0, False, 0, 0)
+
+      line_count = self.log_buffer.get_line_count()
+
+      if line_count >= self.log_buffer_line_limit:
+        iter_start = self.log_buffer.get_start_iter()
+        self.log_buffer.delete(iter_start, self.log_buffer.get_iter_at_line(line_count - self.log_buffer_line_limit))
+      
+      GLib.idle_add(self.scroll_to_end)
 
     return True
+
+  def scroll_to_end(self):
+    self.log_textview.scroll_to_mark(self.log_buffer.get_insert(), 0, False, 0, 0)
+    
+    return False    
 
   def plot_graph(self):
     figure = Figure(figsize=(5, 4), dpi=100)
@@ -253,6 +282,17 @@ class ScyllaGUI(Gtk.Window):
 
     return canvas
   
+  def turn_on_scylla(self):
+    ebpf_prog = Scylla(log)
+    ebpf_thread = threading.Thread(target=ebpf_prog.run, name="Scylla_Thread", daemon=True)
+
+    ebpf_thread.start()
+  
+  def turn_off_scylla(self):
+    # TODO: não está descarregando o programa ebpf!
+
+    return True
+    
 def get_clef_gpid():
   global clef_gpid
   try:
