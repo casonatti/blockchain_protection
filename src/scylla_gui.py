@@ -4,6 +4,7 @@ from Log import *
 from scylla import *
 import subprocess
 import threading
+import multiprocessing
 import time
 
 gi.require_version("Gtk", "3.0")
@@ -283,13 +284,18 @@ class ScyllaGUI(Gtk.Window):
     return canvas
   
   def turn_on_scylla(self):
-    ebpf_prog = Scylla(log)
-    ebpf_thread = threading.Thread(target=ebpf_prog.run, name="Scylla_Thread", daemon=True)
+    self.ebpf_prog = Scylla(log)
+
+    ebpf_thread = threading.Thread(target=self.ebpf_prog.run, name="Scylla_Thread", daemon=True)
 
     ebpf_thread.start()
+
+    return ebpf_thread
   
   def turn_off_scylla(self):
-    # TODO: não está descarregando o programa ebpf!
+    self.ebpf_prog.close()
+
+    self.ebpf_thr.join()
 
     return True
     
