@@ -4,7 +4,6 @@ from Log import *
 from scylla import *
 import subprocess
 import threading
-import multiprocessing
 import time
 
 gi.require_version("Gtk", "3.0")
@@ -24,7 +23,6 @@ with open("../evaluation/config/protected_inodes.txt","r") as file:
   for line in file.readlines():
     temp = line.split()
     prot_files.append([int(temp[0]), temp[1]])
-    # print(prot_files)
 
 file.close()
 
@@ -169,16 +167,20 @@ class ScyllaGUI(Gtk.Window):
 
   # Elements functions
   def on_switch_activated(self, switch, gparam):
+    time_s = time.time()
+    dt = datetime.fromtimestamp(time_s)
+    log_timestamp = dt.strftime("%Y-%m-%d %H:%M")
+    
     if switch.get_active():
       self.add_file_btn.set_sensitive(False)
       self.remove_file_btn.set_sensitive(False)
       self.ebpf_thr = self.turn_on_scylla()
-      state = "Scylla turned ON"
+      state = f"[{log_timestamp}] [INFO] Scylla turned ON"
     else:
       self.add_file_btn.set_sensitive(True)
       self.remove_file_btn.set_sensitive(True)
       self.turn_off_scylla()
-      state = "Scylla turned OFF"
+      state = f"[{log_timestamp}] [INFO] Scylla turned OFF"
 
     log.append(state)
 
@@ -214,12 +216,16 @@ class ScyllaGUI(Gtk.Window):
             print("Failed to add file. Repeated Inode.")
 
         if not repeated_inode:
+          time_s = time.time()
+          dt = datetime.fromtimestamp(time_s)
+          log_timestamp = dt.strftime("%Y-%m-%d %H:%M")
+
           with open("../evaluation/config/protected_inodes.txt","a") as file:
             text = str(inode) + ' ' + filename + '\n'
             file.write(text)
           file.close()
           self.prot_files_list.append([False, inode, filename])
-          log_message = "Adding file [" + filename + "] to the list."
+          log_message = f"[{log_timestamp}] [INFO] Adding file [{filename}] to the list."
           log.append(log_message)
 
       if len(self.prot_files_list) != 0:
@@ -237,6 +243,10 @@ class ScyllaGUI(Gtk.Window):
         self.prot_files_list.remove(iter)
 
         text = str(temp_inode) + ' ' + str(temp_name) + '\n'
+
+        time_s = time.time()
+        dt = datetime.fromtimestamp(time_s)
+        log_timestamp = dt.strftime("%Y-%m-%d %H:%M")
         
         with open("../evaluation/config/protected_inodes.txt","r+") as file:
           lines = file.readlines()
@@ -247,7 +257,7 @@ class ScyllaGUI(Gtk.Window):
           file.truncate()
           file.close()
 
-        log_message = "Removed file [" + str(temp_name) + "] from the list."
+        log_message = f"[{log_timestamp}] [INFO] Removed file [{str(temp_name)}] from the list."
         log.append(log_message)
 
     if len(self.prot_files_list) == 0:

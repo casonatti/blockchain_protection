@@ -1,0 +1,20 @@
+terminal 1:
+	cd blockchain_protection/simulation
+	python3 clef_initializer.py
+	
+terminal 2:
+	cd blockchain_protection/simulation
+	bootnode -nodekey boot.key -addr :30305
+
+terminal 3:
+	cd blockchain_protection/simulation
+	geth --datadir node2 --port 30307 --bootnodes enode://1e8e94910360c8b175241e5969281bf186f8e2d315d81388d2551cfdc20b49c61d56a40e79091aef2d228f97440a7f26f433a9cff4852808e805f3f7b4c35e28@127.0.0.1:0?discport=30305  --networkid 31051992 --unlock 0x65BbACef21EC52B240538497441B9DfF24BF839a --password n2.txt --authrpc.port 8552
+	
+terminal 4:
+	## Aqui sera dado o comando de transacao apos o geth attach
+	cd blockchain_protection/simulation
+	geth attach node2/geth.ipc
+
+terminal 5:
+	cd blockchain_protection/src
+	sudo python3 scylla_gui.py

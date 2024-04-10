@@ -11,7 +11,7 @@ class Log:
     self.line_control = 1
 
   def config_initialization(self, textview):
-    with open('log.txt', 'r') as file:
+    with open('../logs/log.txt', 'r') as file:
       lines = file.readlines()
     
     file.close()
@@ -19,7 +19,7 @@ class Log:
     self.line_control = len(lines) + 1
     
     for i, line in enumerate(lines):
-      textview.append(linecache.getline("log.txt", i+1))
+      textview.append(linecache.getline("../logs/log.txt", i+1))
       linecache.clearcache()
 
   def append(self, text_log):
@@ -38,9 +38,9 @@ class Log:
       try:
         # print("Writing to log file.")
 
-        with open("log.txt", "a") as log_file:
+        with open("../logs/log.txt", "a") as log_file:
           while len(self.buffer) > 0:
-            log_file.write(">>>> " + str(self.buffer[0]) + '\n')
+            log_file.write(str(self.buffer[0]) + '\n')
             self.buffer.pop(0)
             self.counter += 1
 
@@ -71,7 +71,7 @@ class Log:
         # print("Reading log file")
         
         while self.counter > 1:
-          textview_buffer.append(linecache.getline("log.txt", self.line_control))
+          textview_buffer.append(linecache.getline("../logs/log.txt", self.line_control))
           linecache.clearcache()
           self.line_control += 1
           self.counter -= 1

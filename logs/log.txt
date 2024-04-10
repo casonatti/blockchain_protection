@@ -1,0 +1,370 @@
+>>>> Adding file [log.txt] to the list.
+>>>> Adding file [scylla.py] to the list.
+>>>> Adding file [readMonitor.c] to the list.
+>>>> Adding file [Log.py] to the list.
+>>>> Adding file [wallet.txt] to the list.
+>>>> Adding file [keystore.txt] to the list.
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> 16534 16534 1000 44311132 b'GPID Not Authorized' 0
+>>>> 16546 16546 0 44311132 b'Authorized' 1
+>>>> 16546 16546 0 44311132 b'Authorized' 2
+>>>> 16549 16549 1000 44311132 b'GPID Not Authorized' 0
+>>>> 16579 16579 1000 44311144 b'GPID Not Authorized' 0
+>>>> 16593 16593 0 44311144 b'Authorized' 3
+>>>> 16593 16593 0 44311144 b'Authorized' 4
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Removed file [keystore.txt] from the list.
+>>>> Removed file [wallet.txt] from the list.
+>>>> Removed file [wallet.txt] from the list.
+>>>> Removed file [44311144 wallet.txt] from the list.
+>>>> Removed file [44311144 wallet.txt
+] from the list.
+>>>> Removed file [44311132 keystore.txt
+] from the list.
+>>>> Adding file [main.py] to the list.
+>>>> Adding file [gui_tests.py] to the list.
+>>>> Removed file [gui_tests.py] from the list.
+>>>> Removed file [main.py] from the list.
+>>>> Adding file [wallet.txt] to the list.
+>>>> Adding file [keystore.txt] to the list.
+>>>> Scylla turned ON
+>>>> 18081 18081 0 44311144 b'Authorized' 1
+>>>> 18081 18081 0 44311144 b'Authorized' 2
+>>>> 18084 18084 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Removed file [wallet.txt] from the list.
+>>>> Scylla turned ON
+>>>> 18090 18090 1000 44311144 b'GPID Not Authorized' 0
+>>>> Adding file [wallet.txt] to the list.
+>>>> Scylla turned ON
+>>>> 18497 18497 1000 44311144 b'GPID Not Authorized' 0
+>>>> 18500 18500 0 44311144 b'Authorized' 1
+>>>> 18500 18500 0 44311144 b'Authorized' 2
+>>>> Removed file [wallet.txt] from the list.
+>>>> Scylla turned ON
+>>>> 18508 18508 0 44311144 b'Authorized' 3
+>>>> 18508 18508 0 44311144 b'Authorized' 4
+>>>> 18509 18509 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Adding file [wallet.txt] to the list.
+>>>> Scylla turned ON
+>>>> 19557 19557 1000 44311144 b'GPID Not Authorized' 0
+>>>> 19560 19560 0 44311144 b'Authorized' 1
+>>>> 19560 19560 0 44311144 b'Authorized' 2
+>>>> Removed file [wallet.txt] from the list.
+>>>> Scylla turned ON
+>>>> 19623 19623 0 44311144 b'Authorized' 3
+>>>> 19623 19623 0 44311144 b'Authorized' 4
+>>>> 19624 19624 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> 25160 25160 1000 44311132 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> 25252 25252 1000 44311132 b'GPID Not Authorized' 0
+>>>> 25254 25254 1000 44311132 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Adding file [wallet.txt] to the list.
+>>>> Scylla turned ON
+>>>> 26637 26637 1000 44311132 b'GPID Not Authorized' 0
+>>>> 26667 26667 1000 44311144 b'GPID Not Authorized' 0
+>>>> 26683 26683 0 44311144 b'Authorized' 1
+>>>> 26683 26683 0 44311144 b'Authorized' 2
+>>>> Scylla turned OFF
+>>>> 26692 26692 0 44311144 b'Authorized' 3
+>>>> 26692 26692 0 44311144 b'Authorized' 4
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 8971 8971 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> 9013 9013 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned OFF
+>>>> Scylla turned OFF
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Adding file [readMonitor.c] to the list.
+>>>> Removed file [readMonitor.c] from the list.
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 5578 5578 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 5586 5586 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 5817 5817 1000 44311144 b'GPID Not Authorized' 0
+>>>> 5821 5821 0 44311144 b'Authorized' 1
+>>>> 5821 5821 0 44311144 b'Authorized' 2
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 5938 5938 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 5981 5981 1000 44311144 b'GPID Not Authorized' 0
+>>>> 5985 5985 0 44311144 b'Authorized' 1
+>>>> 5985 5985 0 44311144 b'Authorized' 2
+>>>> 5986 5986 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 6123 6123 1000 44311144 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Adding file [testes.txt] to the list.
+>>>> Scylla turned ON
+>>>> 6145 6145 1000 44311036 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Removed file [testes.txt] from the list.
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 6226 6226 1000 44311144 b'GPID Not Authorized' 0
+>>>> 6240 6240 0 44311144 b'Authorized' 1
+>>>> 6240 6240 0 44311144 b'Authorized' 2
+>>>> Scylla turned OFF
+>>>> Adding file [testes.txt] to the list.
+>>>> Scylla turned ON
+>>>> 6260 6260 1000 44311036 b'GPID Not Authorized' 0
+>>>> Scylla turned OFF
+>>>> Removed file [testes.txt] from the list.
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Removed file [wallet.txt] from the list.
+>>>> Removed file [keystore.txt] from the list.
+>>>> Adding file [testes.txt] to the list.
+>>>> Adding file [wallet.txt] to the list.
+>>>> Adding file [keystore.txt] to the list.
+>>>> Scylla turned ON
+>>>> 7961 7961 1000 44311036 b'GPID Not Authorized' 0
+>>>> 7962 7962 1000 44311144 b'GPID Not Authorized' 0
+>>>> 7965 7965 1000 44311132 b'GPID Not Authorized' 0
+>>>> 7975 7975 0 44311132 b'Authorized' 1
+>>>> 7975 7975 0 44311132 b'Authorized' 2
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> 11623 11617 1000 44178484 b'Authorized' 1
+>>>> 11623 11617 1000 44178484 b'Authorized' 2
+>>>> 15063 15063 1000 44178484 b'GPID Not Authorized' 0
+>>>> 11628 11617 1000 44178484 b'Authorized' 3
+>>>> 11628 11617 1000 44178484 b'Authorized' 4
+>>>> 11624 11617 1000 44178484 b'Authorized' 5
+>>>> 11624 11617 1000 44178484 b'Authorized' 6
+>>>> 15145 15145 0 44311144 b'GPID Not Authorized' 0
+>>>> 15148 15148 0 44311144 b'GPID Not Authorized' 0
+>>>> 15151 15151 0 44311144 b'GPID Not Authorized' 0
+>>>> 15154 15154 0 44311144 b'GPID Not Authorized' 0
+>>>> 15157 15157 0 44311144 b'GPID Not Authorized' 0
+>>>> 15160 15160 0 44311144 b'GPID Not Authorized' 0
+>>>> 15163 15163 0 44311144 b'GPID Not Authorized' 0
+>>>> 15166 15166 0 44311144 b'GPID Not Authorized' 0
+>>>> 15169 15169 0 44311144 b'GPID Not Authorized' 0
+>>>> 15172 15172 0 44311144 b'GPID Not Authorized' 0
+>>>> 15175 15175 0 44311144 b'GPID Not Authorized' 0
+>>>> 15178 15178 0 44311144 b'GPID Not Authorized' 0
+>>>> 15181 15181 0 44311144 b'GPID Not Authorized' 0
+>>>> 15184 15184 0 44311144 b'GPID Not Authorized' 0
+>>>> 15187 15187 0 44311144 b'GPID Not Authorized' 0
+>>>> 15190 15190 0 44311144 b'GPID Not Authorized' 0
+>>>> 15193 15193 0 44311144 b'GPID Not Authorized' 0
+>>>> 15196 15196 0 44311144 b'GPID Not Authorized' 0
+>>>> 15199 15199 0 44311144 b'GPID Not Authorized' 0
+>>>> 15202 15202 0 44311144 b'GPID Not Authorized' 0
+>>>> 15205 15205 0 44311144 b'GPID Not Authorized' 0
+>>>> 15208 15208 0 44311144 b'GPID Not Authorized' 0
+>>>> 15211 15211 0 44311144 b'GPID Not Authorized' 0
+>>>> 15214 15214 0 44311144 b'GPID Not Authorized' 0
+>>>> 15217 15217 0 44311144 b'GPID Not Authorized' 0
+>>>> 15220 15220 0 44311144 b'GPID Not Authorized' 0
+>>>> 15223 15223 0 44311144 b'GPID Not Authorized' 0
+>>>> 15226 15226 0 44311144 b'GPID Not Authorized' 0
+>>>> 15229 15229 0 44311144 b'GPID Not Authorized' 0
+>>>> 15232 15232 0 44311144 b'GPID Not Authorized' 0
+>>>> 15235 15235 0 44311144 b'GPID Not Authorized' 0
+>>>> 15238 15238 0 44311144 b'GPID Not Authorized' 0
+>>>> 15241 15241 0 44311144 b'GPID Not Authorized' 0
+>>>> 15244 15244 0 44311144 b'GPID Not Authorized' 0
+>>>> 15247 15247 0 44311144 b'GPID Not Authorized' 0
+>>>> 15250 15250 0 44311144 b'GPID Not Authorized' 0
+>>>> 15253 15253 0 44311144 b'GPID Not Authorized' 0
+>>>> 15256 15256 0 44311144 b'GPID Not Authorized' 0
+>>>> 15259 15259 0 44311144 b'GPID Not Authorized' 0
+>>>> 15262 15262 0 44311144 b'GPID Not Authorized' 0
+>>>> 15265 15265 0 44311144 b'GPID Not Authorized' 0
+>>>> 15268 15268 0 44311144 b'GPID Not Authorized' 0
+>>>> 15271 15271 0 44311144 b'GPID Not Authorized' 0
+>>>> 15274 15274 0 44311144 b'GPID Not Authorized' 0
+>>>> 15277 15277 0 44311144 b'GPID Not Authorized' 0
+>>>> 15280 15280 0 44311144 b'GPID Not Authorized' 0
+>>>> 15283 15283 0 44311144 b'GPID Not Authorized' 0
+>>>> 15286 15286 0 44311144 b'GPID Not Authorized' 0
+>>>> 15289 15289 0 44311144 b'GPID Not Authorized' 0
+>>>> 15292 15292 0 44311144 b'GPID Not Authorized' 0
+>>>> 15295 15295 0 44311144 b'GPID Not Authorized' 0
+>>>> 15298 15298 0 44311144 b'GPID Not Authorized' 0
+>>>> 15301 15301 0 44311144 b'GPID Not Authorized' 0
+>>>> 15304 15304 0 44311144 b'GPID Not Authorized' 0
+>>>> 15307 15307 0 44311144 b'GPID Not Authorized' 0
+>>>> 15310 15310 0 44311144 b'GPID Not Authorized' 0
+>>>> 15313 15313 0 44311144 b'GPID Not Authorized' 0
+>>>> 15316 15316 0 44311144 b'GPID Not Authorized' 0
+>>>> 15319 15319 0 44311144 b'GPID Not Authorized' 0
+>>>> 15322 15322 0 44311144 b'GPID Not Authorized' 0
+>>>> 15325 15325 0 44311144 b'GPID Not Authorized' 0
+>>>> 15328 15328 0 44311144 b'GPID Not Authorized' 0
+>>>> 15331 15331 0 44311144 b'GPID Not Authorized' 0
+>>>> 15334 15334 0 44311144 b'GPID Not Authorized' 0
+>>>> 15337 15337 0 44311144 b'GPID Not Authorized' 0
+>>>> 15340 15340 0 44311144 b'GPID Not Authorized' 0
+>>>> 15343 15343 0 44311144 b'GPID Not Authorized' 0
+>>>> 15346 15346 0 44311144 b'GPID Not Authorized' 0
+>>>> 15349 15349 0 44311144 b'GPID Not Authorized' 0
+>>>> 15352 15352 0 44311144 b'GPID Not Authorized' 0
+>>>> 11628 11617 1000 44178484 b'Authorized' 7
+>>>> 11628 11617 1000 44178484 b'Authorized' 8
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> 15619 15619 1000 44178484 b'GPID Not Authorized' 0
+>>>> 15620 15620 1000 44178484 b'GPID Not Authorized' 0
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> [1712145130797850708] Accessed DENIED for GPID [11614] trying to read file [44311144]
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> [1712145221727641760] Access DENIED for GPID [11755] trying to read file [44311144]
+>>>> [1712145238319815523] Access DENIED for GPID [11756] trying to read file [44311144]
+>>>> [1712145300255157227] File [44311144] accessed by GPID [11784]
+>>>> [1712145300255169055] File [44311144] accessed by GPID [11784]
+>>>> [1712145629038205652] File [44311144] accessed by GPID [11999]
+>>>> [1712145629038217765] File [44311144] accessed by GPID [11999]
+>>>> [1712145631816892609] Access DENIED for GPID [12008] trying to read file [44311144]
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned OFF
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> b'wallet.txt'
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> Scylla turned ON
+>>>> [1712151347856742640] Access DENIED for GPID [18068] trying to read file [b'wallet.txt']
+>>>> Scylla turned ON
+>>>> [1712151388185126479] Access DENIED for GPID [18143] trying to read file [b'wallet.txt']
+>>>> Scylla turned ON
+>>>> [1712151461658419027] Access DENIED for GPID [18397] trying to read file [b'wallet.txt']
+>>>> Scylla turned ON
+>>>> [1712151509275068819] Access DENIED for GPID [18475] trying to read file [wallet.txt]
+>>>> [1712151520738598729] File [wallet.txt] accessed by GPID [18478]
+>>>> [1712151520738613042] File [wallet.txt] accessed by GPID [18478]
+[1712151731627984843]Scylla turned ON
+[1712151738340697077] File [wallet.txt] accessed by GPID [18702]
+[1712151738340708784] File [wallet.txt] accessed by GPID [18702]
+[1712151924479392287] Scylla turned ON
+[1712151927663834919] File [wallet.txt] accessed by GPID [18866]
+[1712151927663847045] File [wallet.txt] accessed by GPID [18866]
+[1712151932521597568] Access DENIED for GPID [18867] trying to read file [wallet.txt]
+[1712151966512715290] Scylla turned OFF
+[1712151991202779319] Scylla turned ON
+[1712151993778892715] Access DENIED for GPID [18920] trying to read file [wallet.txt]
+[1712151995689165531] File [wallet.txt] accessed by GPID [18923]
+[1712151995689177378] File [wallet.txt] accessed by GPID [18923]
+[1712151997875021139] Access DENIED for GPID [18924] trying to read file [wallet.txt]
+[1712151999924723999] Scylla turned OFF
+[1712152074433883910] Adding file [gui_tests.py] to the list.
+Removed file [gui_tests.py] from the list.
+Removed file [testes.txt] from the list.
+[1712152563336402708] Adding file [scylla_gui.py] to the list.
+[1712152567032906133] Removed file [scylla_gui.py] from the list.
+[1712244052202044735] Scylla turned ON
+[1712244109897350627] Scylla turned ON
+[2024-04-04 12:21] Access DENIED for GPID [15552] trying to read file [wallet.txt]
+[2024-04-04 12:22] Access DENIED for GPID [15556] trying to read file [wallet.txt]
+[2024-04-04 12:22] Access DENIED for GPID [15558] trying to read file [wallet.txt]
+[2024-04-04 12:28][INFO] Scylla turned ON
+[2024-04-04 12:29][INFO] Scylla turned OFF
+[2024-04-04 12:29] [INFO] Scylla turned ON
+[2024-04-04 12:29] [INFO] Scylla turned OFF
+[2024-04-04 12:29] [INFO] Adding file [Log.py] to the list.
+[2024-04-04 12:29] [INFO] Removed file [Log.py] from the list.
+[2024-04-04 12:29] [INFO] Scylla turned ON
+[2024-04-04 12:30][DENIED] GPID [16004] was blocked trying to read file [wallet.txt]
+[2024-04-04 12:30] [INFO] Scylla turned OFF
+[2024-04-04 12:30] [INFO] Scylla turned ON
+[2024-04-04 12:30] [DENIED] GPID [16091] was blocked trying to read file [wallet.txt]
+[2024-04-04 12:30] [ALLOWED] File [wallet.txt] accessed by GPID [16094]
+[2024-04-04 12:30] [ALLOWED] File [wallet.txt] accessed by GPID [16094]
+[2024-04-10 07:56] [INFO] Scylla turned ON
+[2024-04-10 07:56] [DENIED] GPID [8172] was blocked trying to read file [wallet.txt]
+[2024-04-10 07:56] [ALLOWED] File [wallet.txt] accessed by GPID [8178]
+[2024-04-10 07:56] [ALLOWED] File [wallet.txt] accessed by GPID [8178]
+[2024-04-10 07:56] [INFO] Scylla turned OFF

@@ -2,7 +2,7 @@ from bcc import BPF
 from ctypes import *
 from Log import *
 import time
-import threading
+from datetime import datetime
 
 class Scylla():
   def __init__(self, log):
@@ -42,7 +42,20 @@ class Scylla():
   def log_event(self, cpu, data, size):
     data = self.b["output"].event(data)
 
-    self.log.append(f"{data.thread_pid} {data.thread_gpid} {data.uid} {data.hooked_inode} {data.message} {data.counter}")
+    filename = data.hooked_filename.decode("utf-8")
+
+    time_ns = data.timestamp
+    time_s = time_ns / 1e9
+    dt = datetime.fromtimestamp(time_s)
+    log_timestamp = dt.strftime("%Y-%m-%d %H:%M")
+    
+    if data.auth:
+      log_text = f"[{log_timestamp}] [ALLOWED] File [{filename}] accessed by GPID [{data.thread_gpid}]"
+    else:
+      log_text = f"[{log_timestamp}] [DENIED] GPID [{data.thread_gpid}] was blocked trying to read file [{filename}]"
+
+    self.log.append(log_text)
+    
     # with open(result_file, 'a') as csvfile:
     #   csv_append = csv.writer(csvfile)
     #   csv_append.writerow([data.counter, data.timestamp])
