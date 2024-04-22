@@ -368,3 +368,8 @@ Removed file [testes.txt] from the list.
 [2024-04-10 07:56] [ALLOWED] File [wallet.txt] accessed by GPID [8178]
 [2024-04-10 07:56] [ALLOWED] File [wallet.txt] accessed by GPID [8178]
 [2024-04-10 07:56] [INFO] Scylla turned OFF
+[2024-04-15 14:48] [INFO] Removed file [UTC--2023-11-29T13-14-59.455403193Z--65bbacef21ec52b240538497441b9dff24bf839a] from the list.
+[2024-04-15 14:48] [INFO] Removed file [keystore.txt] from the list.
+[2024-04-15 14:49] [INFO] Removed file [wallet.txt] from the list.
+[2024-04-15 14:49] [INFO] Adding file [wallet.txt] to the list.
+[2024-04-15 14:50] [INFO] Removed file [wallet.txt] from the list.
