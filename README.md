@@ -21,7 +21,7 @@ During execution, **Scylla** actively monitors the system calls of processes aim
 
 ## Performance Comparison
 
-In comparative evaluations, **solution** has proven to outperform *inotify*, a Linux kernel subsystem designed for monitoring changes in the filesystem. Unlike *inotify*, **Scylla** goes beyond mere monitoring, actively preventing unauthorized file access and providing a more robust security solution for BC wallet-related files.
+In comparative evaluations, **Scylla** has proven to outperform *inotify*, a Linux kernel subsystem designed for monitoring changes in the filesystem. Unlike *inotify*, **Scylla** goes beyond mere monitoring, actively preventing unauthorized file access and providing a more robust security solution for BC wallet-related files.
 
 ## Getting Started
 
